@@ -1,10 +1,15 @@
-# Terraform Deployment
+# Terraform
 
-## Setup Terraform
+## Setting up Terraform
+Install Terraform on your local machine using:
 ```shell script
-./install_terraform.sh
+./terraform_install/install_terraform.sh
 ```
 
+
+
+
+# Basic Terraform Commands
 ## Initialize Terraform 
 ```shell script
 terraform init
@@ -12,12 +17,12 @@ terraform init
 
 ## Create Terraform plan 
 ```shell script
-terraform plan -out=terraState.tfstate
+terraform plan -out=<Output_Plan_File_Name.tfstate>
 ```
 
 ## Apply Terraform template 
 ```shell script
-terraform apply "terraState.tfstate"
+terraform apply "<Output_Plan_File_Name.tfstate>"
 ```
 
 ### Destroy VPC

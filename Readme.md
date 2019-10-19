@@ -17,7 +17,7 @@ terraform init
 
 ## Create Terraform plan 
 ```shell script
-terraform plan -out=<Output_Plan_File_Name.tfstate>
+terraform plan -var-file=<varfile_name>.tfvars -out=<Output_Plan_File_Name.tfstate>
 ```
 
 ## Apply Terraform template 
@@ -27,5 +27,5 @@ terraform apply "<Output_Plan_File_Name.tfstate>"
 
 ### Destroy VPC
 ```shell script
-terraform destroy
+terraform destroy -var-file=<varfile_name>.tfvars
 ```

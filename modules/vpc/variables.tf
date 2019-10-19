@@ -1,3 +1,7 @@
+variable "env" {
+  default = "dev"
+}
+
 variable "aws_profile" {
   type        = string
   description = "Aws Profile"

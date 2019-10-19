@@ -6,7 +6,35 @@ Install Terraform on your local machine using:
 ./terraform_install/install_terraform.sh
 ```
 
+## Terraform Structure
 
+According to best practices, the terraform structure is as follows:
+```
+├── environments
+│   ├── dev
+│   │   ├── main.tf
+│   │   ├── terraform-dev.tfvars
+│   │   └── variables.tf
+│   ├── prod
+│   │   ├── main.tf
+│   │   ├── terraform-prod.tfvars
+│   │   └── variables.tf
+│   └── readme.md
+├── modules
+│   └── {LIST_OF_ALL_MODULES}
+├── Readme.md
+└── terraform_install
+    ├── install_terraform.sh
+    └── readme.md
+```
+
+### Environments
+There are two environments, i.e. `dev` and `prod`. \
+To deploy to specific environment, initialize terraform in respective folder
+
+### Modules
+All the modules are stored in the modules folder, with a seperate folder for every module. \
+All all new and existing modules in this folder.
 
 
 # Basic Terraform Commands

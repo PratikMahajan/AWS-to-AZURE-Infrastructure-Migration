@@ -1,7 +1,12 @@
+provider "aws" {
+  region = "us-east-1"
+  shared_credentials_file = "~/.aws/credentials"
+  profile = "dev"
+}
+
 module "dev-vps"{
   source          = "../../modules/vpc"
   env             = "dev"
-  aws_profile     = "dev"
   aws_region      = var.aws_region
   subnet1_az      = var.subnet1_az
   subnet1_cidr    = var.subnet1_cidr

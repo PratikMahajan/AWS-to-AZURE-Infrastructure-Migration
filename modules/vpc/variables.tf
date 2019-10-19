@@ -1,10 +1,5 @@
 variable "env" {}
 
-variable "aws_profile" {
-  type        = string
-  description = "Aws Profile"
-}
-
 variable "aws_region" {
   type        = string
   description = "Region for the VPC"

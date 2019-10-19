@@ -1,6 +1,4 @@
-variable "env" {
-  default = "dev"
-}
+variable "env" {}
 
 variable "aws_profile" {
   type        = string

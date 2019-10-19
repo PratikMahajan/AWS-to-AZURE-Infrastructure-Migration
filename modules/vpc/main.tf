@@ -5,7 +5,7 @@ resource "aws_vpc" "default" {
   enable_dns_hostnames = true
 
  tags = {
-    Name = var.vpc_name
+    Name = "${var.env}-${var.vpc_name}"
   }
 }
 
@@ -16,7 +16,7 @@ resource "aws_subnet" "public-subnet" {
   availability_zone = var.subnet1_az
 
  tags = {
-    Name = "${var.env}-var.subnet1_name"
+    Name = "${var.env}-${var.subnet1_name}"
   }
 }
 
@@ -37,7 +37,7 @@ resource "aws_subnet" "private-subnet2" {
   availability_zone = var.subnet3_az
 
  tags = {
-    Name = var.subnet3_name
+    Name = "${var.env}-${var.subnet3_name}"
   }
 }
 
@@ -46,7 +46,7 @@ resource "aws_internet_gateway" "gw" {
   vpc_id = aws_vpc.default.id
 
  tags = {
-    Name = "VPC IGW"
+    Name = "${var.env}-VPC-IGW"
   }
 }
 
@@ -60,10 +60,9 @@ resource "aws_route_table" "web-public-rt" {
   }
 
  tags = {
-    Name = "Public Subnet RT"
+    Name = "${var.env}-Public-Subnet-RT"
   }
 }
-
 # Assign the route table to the public Subnet
 resource "aws_route_table_association" "subnet1" {
   subnet_id       = aws_subnet.public-subnet.id

@@ -6,3 +6,5 @@ variable "ebs_volume_size" {}
 variable "ebs_delete_on_termination" {}
 variable "env" {}
 variable "ec2_termination_disable" {}
+variable "ec2_instance_type" {}
+variable "ec2_instance_name" {}

@@ -29,3 +29,14 @@ variable "db_name" {}
 variable "db_username" {}
 variable "db_password" {}
 variable "publicly_accessible" {}
+
+
+# Configuring ec2 instance
+variable "aws_account_id" {}
+variable "ebs_block_name" {}
+variable "ebs_volume_type" {}
+variable "ebs_volume_size" {}
+variable "ebs_delete_on_termination" {}
+variable "ec2_termination_disable" {}
+variable "ec2_instance_type" {}
+variable "ec2_instance_name" {}

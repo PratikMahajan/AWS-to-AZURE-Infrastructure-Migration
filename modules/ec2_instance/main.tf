@@ -9,6 +9,7 @@ resource "aws_instance" "webec2" {
   disable_api_termination = var.ec2_termination_disable
 
   vpc_security_group_ids  = var.aws_ec2_security_group
+  subnet_id               = var.aws_ec2_subnet_id
 
   ebs_block_device {
     device_name           = var.ebs_block_name

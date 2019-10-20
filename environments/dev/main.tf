@@ -51,7 +51,8 @@ module "dev_rds_instance" {
 module "dev_ec2_instance" {
   source                    = "../../modules/ec2_instance"
   aws_account_id            = var.aws_account_id
-  aws_ec2_security_group    = module.dev_security_group.aws_app_security_group
+  aws_ec2_security_group    = ["${module.dev_security_group.aws_app_security_group}"]
+  aws_ec2_subnet_id         = module.dev_vps.aws_subnet1_id
   ebs_block_name            = var.ebs_block_name
   ebs_delete_on_termination = var.ebs_delete_on_termination
   ebs_volume_size           = var.ebs_volume_size

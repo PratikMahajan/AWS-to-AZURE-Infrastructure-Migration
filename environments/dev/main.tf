@@ -4,7 +4,7 @@ provider "aws" {
   profile                 = "dev"
 }
 
-module "dev-vps"{
+module "dev_vps"{
   source          = "../../modules/vpc"
   env             = "dev"
   aws_region      = var.aws_region
@@ -19,4 +19,9 @@ module "dev-vps"{
   subnet3_name    = var.subnet3_name
   vpc_cidr        = var.vpc_cidr
   vpc_name        = var.vpc_name
+}
+
+module "dev_security_group"{
+  source          = "../../modules/security_group"
+  aws_vpc_id      = module.dev_vps.vpc_id
 }

@@ -4,7 +4,7 @@ provider "aws" {
   profile                 = "prod"
 }
 
-module "prod-vps"{
+module "prod_vps"{
   source          = "../../modules/vpc"
   env             = "prod"
   aws_region      = var.aws_region
@@ -19,4 +19,9 @@ module "prod-vps"{
   subnet3_name    = var.subnet3_name
   vpc_cidr        = var.vpc_cidr
   vpc_name        = var.vpc_name
+}
+
+module "prod_security_group"{
+  source          = "../../modules/security_group"
+  aws_vpc_id      = module.prod_vps.vpc_id
 }

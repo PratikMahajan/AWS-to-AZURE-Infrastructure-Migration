@@ -1,3 +1,5 @@
+env = "foo"
+
 # Variables for VPC creation
 aws_region = "foo"
 subnet1_az = "foo"

@@ -6,7 +6,7 @@ provider "aws" {
 
 module "dev_vps"{
   source          = "../../modules/vpc"
-  env             = "dev"
+  env             = var.env
   aws_region      = var.aws_region
   subnet1_az      = var.subnet1_az
   subnet1_cidr    = var.subnet1_cidr
@@ -29,6 +29,7 @@ module "dev_security_group"{
 module "dev_s3_bucket" {
   source          = "../../modules/s3_bucket"
   s3_bucket_name  = var.s3_bucket_name
+  env             = var.env
 }
 
 module "dev_rds_instance" {

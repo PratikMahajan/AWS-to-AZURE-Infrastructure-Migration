@@ -1,3 +1,5 @@
+variable "env" {}
+
 # Configuration for VPC
 variable "aws_region" {}
 variable "subnet1_az" {}

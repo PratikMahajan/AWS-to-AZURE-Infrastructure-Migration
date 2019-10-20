@@ -30,3 +30,20 @@ module "prod_s3_bucket" {
   source          = "../../modules/s3_bucket"
   s3_bucket_name  = var.s3_bucket_name
 }
+
+
+module "prod_rds_instance" {
+  source                  = "../../modules/rds_database"
+  db_identifier           = var.db_identifier
+  allocated_storage       = var.allocated_storage
+  storage_type            = var.storage_type
+  database_engine         = var.database_engine
+  database_engine_version = var.database_engine_version
+  instance_class          = var.instance_class
+  db_name                 = var.db_name
+  db_username             = var.db_username
+  db_password             = var.db_password
+  subnet_group_id         = ["${module.prod_vps.aws_subnet1_id}", "${module.prod_vps.aws_subnet2_id}"]
+  publicly_accessible     = var.publicly_accessible
+  db_security_group       = [module.prod_security_group.aws_db_security_group]
+}

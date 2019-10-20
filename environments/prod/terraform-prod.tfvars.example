@@ -1,3 +1,4 @@
+# Variables for VPC creation
 aws_region = "foo"
 subnet1_az = "foo"
 subnet1_cidr = "foo"
@@ -11,5 +12,17 @@ subnet3_name = "foo"
 vpc_cidr = "foo"
 vpc_name = "foo"
 
-
+# Variables for Database
 s3_bucket_name = foo
+
+# Variables for RDS database instance
+db_identifier           = "foo"
+allocated_storage       = "foo"
+storage_type            = "foo"
+database_engine         = "foo"
+database_engine_version = "foo"
+instance_class          = "foo"
+db_name                 = "foo"
+db_username             = "foo"
+db_password             = "foo"
+publicly_accessible     = "foo"

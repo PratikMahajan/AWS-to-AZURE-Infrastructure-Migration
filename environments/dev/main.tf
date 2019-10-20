@@ -25,3 +25,8 @@ module "dev_security_group"{
   source          = "../../modules/security_group"
   aws_vpc_id      = module.dev_vps.vpc_id
 }
+
+module "dev_s3_bucket" {
+  source          = "../../modules/s3_bucket"
+  s3_bucket_name  = var.s3_bucket_name
+}

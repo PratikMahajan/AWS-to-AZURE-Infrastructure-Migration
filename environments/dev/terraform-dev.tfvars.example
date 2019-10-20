@@ -28,3 +28,13 @@ db_name                 = "foo"
 db_username             = "foo"
 db_password             = "foo"
 publicly_accessible     = "foo"
+
+# Variables for EC2 instance
+aws_account_id              = "foo"
+ebs_block_name              = "foo"
+ebs_volume_type             = "foo"
+ebs_volume_size             = "foo"
+ebs_delete_on_termination   = "foo"
+ec2_termination_disable     = "foo"
+ec2_instance_type           = "foo"
+ec2_instance_name           = "foo"

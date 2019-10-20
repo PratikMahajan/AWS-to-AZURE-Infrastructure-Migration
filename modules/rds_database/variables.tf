@@ -7,5 +7,7 @@ variable "instance_class" {}
 variable "db_name" {}
 variable "db_username" {}
 variable "db_password" {}
-variable "subnet_group" {}
 variable "publicly_accessible" {}
+
+variable "subnet_group_id" {}
+variable "db_security_group" {}

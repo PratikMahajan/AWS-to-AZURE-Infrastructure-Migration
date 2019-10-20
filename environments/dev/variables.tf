@@ -15,3 +15,15 @@ variable "vpc_name" {}
 
 # Configuration for s3 bucket creation
 variable "s3_bucket_name" {}
+
+# Configuring database
+variable "database_engine_version" {}
+variable "db_identifier" {}
+variable "allocated_storage" {}
+variable "storage_type" {}
+variable "database_engine" {}
+variable "instance_class" {}
+variable "db_name" {}
+variable "db_username" {}
+variable "db_password" {}
+variable "publicly_accessible" {}

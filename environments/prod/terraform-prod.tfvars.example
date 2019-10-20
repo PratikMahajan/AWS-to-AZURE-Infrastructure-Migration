@@ -10,3 +10,6 @@ subnet3_cidr = "foo"
 subnet3_name = "foo"
 vpc_cidr = "foo"
 vpc_name = "foo"
+
+
+s3_bucket_name = foo

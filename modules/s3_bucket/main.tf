@@ -8,6 +8,8 @@ resource "aws_s3_bucket" "bucket" {
   bucket = var.s3_bucket_name
   acl    = "private"
 
+  force_destroy = true
+
   lifecycle_rule {
     id      = "images"
     enabled = true
@@ -22,8 +24,6 @@ resource "aws_s3_bucket" "bucket" {
       days          = 30
       storage_class = "STANDARD_IA" # or "ONEZONE_IA"
     }
-
-    force_destroy = true
   }
 
   server_side_encryption_configuration {

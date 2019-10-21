@@ -62,3 +62,11 @@ module "dev_ec2_instance" {
   ec2_termination_disable   = var.ec2_termination_disable
   env                       = var.env
 }
+
+
+module "dev_dynamodb_instance" {
+  source              = "../../modules/dynamodb_instance"
+  dynamo_billing_mode = var.dynamo_billing_mode
+  dynamo_table_name   = var.dynamo_table_name
+  env                 = var.env
+}

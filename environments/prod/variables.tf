@@ -40,3 +40,7 @@ variable "ebs_delete_on_termination" {}
 variable "ec2_termination_disable" {}
 variable "ec2_instance_type" {}
 variable "ec2_instance_name" {}
+
+# Configuring DynamoDB instance
+variable "dynamo_billing_mode" {}
+variable "dynamo_table_name" {}

@@ -50,7 +50,7 @@ module "prod_rds_instance" {
 }
 
 
-module "dev_ec2_instance" {
+module "prod_ec2_instance" {
   source                    = "../../modules/ec2_instance"
   aws_account_id            = var.aws_account_id
   aws_ec2_security_group    = ["${module.prod_security_group.aws_app_security_group}"]
@@ -63,4 +63,12 @@ module "dev_ec2_instance" {
   ec2_instance_type         = var.ec2_instance_type
   ec2_termination_disable   = var.ec2_termination_disable
   env                       = var.env
+}
+
+
+module "prod_dynamodb_instance" {
+  source              = "../../modules/dynamodb_instance"
+  dynamo_billing_mode = var.dynamo_billing_mode
+  dynamo_table_name   = var.dynamo_table_name
+  env                 = var.env
 }

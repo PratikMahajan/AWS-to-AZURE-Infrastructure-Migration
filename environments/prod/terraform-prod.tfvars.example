@@ -38,3 +38,8 @@ ebs_delete_on_termination   = "foo"
 ec2_termination_disable     = "foo"
 ec2_instance_type           = "foo"
 ec2_instance_name           = "foo"
+
+
+# Variables for DynamoDB
+dynamo_billing_mode   = "foo"
+dynamo_table_name     = "foo"

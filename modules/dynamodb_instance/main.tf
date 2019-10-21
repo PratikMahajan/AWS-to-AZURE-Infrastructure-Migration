@@ -3,6 +3,9 @@ resource "aws_dynamodb_table" "dynamotable" {
   billing_mode   = var.dynamo_billing_mode
   hash_key       = "id"
 
+  read_capacity  = 20
+  write_capacity = 20
+
   attribute {
     name = "id"
     type = "S"

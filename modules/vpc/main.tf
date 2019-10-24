@@ -11,10 +11,10 @@ resource "aws_vpc" "default" {
 
 # Define the public subnet
 resource "aws_subnet" "public-subnet" {
-  vpc_id            = aws_vpc.default.id
-  cidr_block        = var.subnet1_cidr
-  availability_zone = var.subnet1_az
-
+  vpc_id                  = aws_vpc.default.id
+  cidr_block              = var.subnet1_cidr
+  availability_zone       = var.subnet1_az
+  map_public_ip_on_launch = true
  tags = {
     Name = "${var.env}-${var.subnet1_name}"
   }

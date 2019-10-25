@@ -42,3 +42,6 @@ variable "ec2_instance_name" {}
 # Configuring DynamoDB instance
 variable "dynamo_billing_mode" {}
 variable "dynamo_table_name" {}
+
+# Configuring circleci_codedeploy iam policy
+variable "application_name" {}

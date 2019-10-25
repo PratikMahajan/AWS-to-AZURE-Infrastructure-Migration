@@ -70,3 +70,11 @@ module "dev_dynamodb_instance" {
   dynamo_table_name   = var.dynamo_table_name
   env                 = var.env
 }
+
+
+module "circle_codedeploy_policy" {
+  source = "../../modules/iam_circleci"
+  account_id = var.aws_account_id
+  application_name = var.application_name
+  aws_region = var.aws_region
+}

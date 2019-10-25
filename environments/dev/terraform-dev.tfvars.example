@@ -42,3 +42,6 @@ ec2_instance_name           = "foo"
 # Variables for DynamoDB
 dynamo_billing_mode   = "foo"
 dynamo_table_name     = "foo"
+
+# variables for circleci-codedeploy policy
+application_name = "foo"

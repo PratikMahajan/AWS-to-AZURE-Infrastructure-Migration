@@ -28,7 +28,7 @@ module "dev_security_group"{
 
 module "dev_s3_bucket" {
   source          = "../../modules/s3_bucket"
-  s3_bucket_name  = var.s3_bucket_name
+  s3_bucket_name  = var.s3_bucket_name_webapp
   env             = var.env
 }
 
@@ -83,5 +83,11 @@ module "iam_ec2_codedeploy_policy_attachment" {
   source = "../../modules/ec2_iam_attachment"
   aws_CircleCI-Code-Deploy_policy = module.circle_codedeploy_policy.aws_CircleCI-Code-Deploy_policy
   aws_CodeDeploy-EC2-S3_policy = module.circle_codedeploy_policy.aws_CodeDeploy-EC2-S3_policy
+}
+
+module "codedeploy_s3_bucket" {
+  source          = "../../modules/s3_bucket"
+  s3_bucket_name  = var.s3_bucket_name_codedeploy
+  env             = var.env
 }
 

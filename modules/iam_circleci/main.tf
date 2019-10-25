@@ -113,7 +113,7 @@ resource "aws_iam_policy" "CircleCI-Code-Deploy" {
         "codedeploy:GetApplicationRevision"
       ],
       "Resource": [
-        "arn:aws:codedeploy:"${var.aws_region}":"${var.account_id}":application:"${var.application_name}""
+        "arn:aws:codedeploy:${var.aws_region}:${var.account_id}:application:${var.application_name}"
       ]
     },
     {
@@ -132,9 +132,9 @@ resource "aws_iam_policy" "CircleCI-Code-Deploy" {
         "codedeploy:GetDeploymentConfig"
       ],
       "Resource": [
-        "arn:aws:codedeploy:"${var.aws_region}":"${var.account_id}":deploymentconfig:CodeDeployDefault.OneAtATime",
-        "arn:aws:codedeploy:"${var.aws_region}":"${var.account_id}":deploymentconfig:CodeDeployDefault.HalfAtATime",
-        "arn:aws:codedeploy:"${var.aws_region}":"${var.account_id}":deploymentconfig:CodeDeployDefault.AllAtOnce"
+        "arn:aws:codedeploy:${var.aws_region}:${var.account_id}:deploymentconfig:CodeDeployDefault.OneAtATime",
+        "arn:aws:codedeploy:${var.aws_region}:${var.account_id}:deploymentconfig:CodeDeployDefault.HalfAtATime",
+        "arn:aws:codedeploy:${var.aws_region}:${var.account_id}:deploymentconfig:CodeDeployDefault.AllAtOnce"
       ]
     }
   ]

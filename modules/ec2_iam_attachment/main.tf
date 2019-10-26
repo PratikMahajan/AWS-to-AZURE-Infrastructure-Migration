@@ -6,12 +6,11 @@ resource "aws_iam_role" "CodeDeployEC2ServiceRole" {
   "Version": "2012-10-17",
   "Statement": [
     {
-      "Action": "sts:AssumeRole",
+      "Effect": "Allow",
       "Principal": {
         "Service": "ec2.amazonaws.com"
       },
-      "Effect": "Allow",
-      "Sid": ""
+      "Action": "sts:AssumeRole"
     }
   ]
 }
@@ -19,9 +18,14 @@ EOF
 }
 
 
-resource "aws_iam_role_policy_attachment" "test-attach" {
+resource "aws_iam_role_policy_attachment" "aws_iam_role_ec2_attach" {
   role       = "${aws_iam_role.CodeDeployEC2ServiceRole.name}"
   policy_arn = var.aws_CodeDeploy-EC2-S3_policy
+}
+
+resource "aws_iam_instance_profile" "CodeDeployEC2ServiceRoleInstance" {
+  name  = "CodeDeployEC2ServiceRoleInstance"
+  role  = "${aws_iam_role.CodeDeployEC2ServiceRole.name}"
 }
 
 

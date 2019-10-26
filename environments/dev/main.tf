@@ -91,3 +91,18 @@ module "codedeploy_s3_bucket" {
   env             = var.env
 }
 
+module "codedeploy_ec2_instance" {
+  source                    = "../../modules/ec2_instance"
+  aws_account_id            = var.aws_account_id
+  aws_ec2_security_group    = ["${module.dev_security_group.aws_app_security_group}"]
+  aws_ec2_subnet_id         = module.dev_vps.aws_subnet1_id
+  ebs_block_name            = var.ebs_block_name
+  ebs_delete_on_termination = var.ebs_delete_on_termination
+  iam_instance_profile      = module.iam_ec2_codedeploy_policy_attachment.CodeDeployEC2ServiceRoleInstance
+  ebs_volume_size           = var.ebs_volume_size
+  ebs_volume_type           = var.ebs_volume_type
+  ec2_instance_name         = var.ec2_instance_name
+  ec2_instance_type         = var.ec2_instance_type
+  ec2_termination_disable   = var.ec2_termination_disable
+  env                       = var.env
+}

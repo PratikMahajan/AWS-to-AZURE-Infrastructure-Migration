@@ -9,3 +9,7 @@ variable "ec2_termination_disable" {}
 variable "ec2_instance_type" {}
 variable "ec2_instance_name" {}
 variable "aws_ec2_subnet_id" {}
+
+variable "iam_instance_profile" {
+  default = ""
+}

@@ -3,6 +3,7 @@ data "aws_ami" "centos" {
   owners = ["${var.aws_account_id}"]
 }
 
+
 resource "aws_instance" "webec2" {
   ami                     = data.aws_ami.centos.id
   instance_type           = var.ec2_instance_type
@@ -11,6 +12,7 @@ resource "aws_instance" "webec2" {
   vpc_security_group_ids  = var.aws_ec2_security_group
   subnet_id               = var.aws_ec2_subnet_id
 
+  iam_instance_profile    = var.iam_instance_profile
   ebs_block_device {
     device_name           = var.ebs_block_name
 

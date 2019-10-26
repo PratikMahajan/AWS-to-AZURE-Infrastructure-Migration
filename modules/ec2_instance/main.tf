@@ -22,6 +22,8 @@ resource "aws_instance" "webec2" {
   }
 
   tags = {
-    Name = "${var.env}-${var.ec2_instance_name}"
+    Name = "${var.ec2_instance_name}"
+    ENV  = var.env
+
   }
 }

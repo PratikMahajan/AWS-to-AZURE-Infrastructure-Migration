@@ -37,7 +37,7 @@ variable "ebs_volume_size" {}
 variable "ebs_delete_on_termination" {}
 variable "ec2_termination_disable" {}
 variable "ec2_instance_type" {}
-variable "ec2_instance_name" {}
+variable "ec2_instance_name_webapp" {}
 
 # Configuring DynamoDB instance
 variable "dynamo_billing_mode" {}
@@ -48,3 +48,6 @@ variable "application_name" {}
 
 # Configuration for s3 bucket for codedeploy
 variable "s3_bucket_name_codedeploy" {}
+
+# Configuring codedeploy ec2instance
+variable "ec2_instance_name_codedeploy" {}

@@ -67,7 +67,7 @@ module "dev_ec2_instance" {
   ec2_instance_type         = var.ec2_instance_type
   ec2_termination_disable   = var.ec2_termination_disable
   env                       = var.env
-  key_name                  = module.aws_key_pair.aws_key_pair_name
+  aws_key_pair_name         = module.aws_key_pair.aws_key_pair_name
 }
 
 
@@ -112,6 +112,6 @@ module "codedeploy_ec2_instance" {
   ec2_instance_type         = var.ec2_instance_type
   ec2_termination_disable   = var.ec2_termination_disable
   env                       = var.env
-  key_name                  = module.aws_key_pair.aws_key_pair_name
+  aws_key_pair_name         = module.aws_key_pair.aws_key_pair_name
 }
 

@@ -12,6 +12,7 @@ resource "aws_instance" "webec2" {
   vpc_security_group_ids  = var.aws_ec2_security_group
   subnet_id               = var.aws_ec2_subnet_id
 
+  key_name                = var.aws_key_pair_name
   iam_instance_profile    = var.iam_instance_profile
   ebs_block_device {
     device_name           = var.ebs_block_name

@@ -26,6 +26,12 @@ module "dev_security_group"{
   aws_vpc_id      = module.dev_vps.vpc_id
 }
 
+module "aws_key_pair" {
+  source = "../../modules/aws_key_pair"
+  key_pair_name = "${var.env}-${var.application_name}"
+  ssh_public_key = var.ssh_public_key
+}
+
 module "dev_s3_bucket" {
   source          = "../../modules/s3_bucket"
   s3_bucket_name  = var.s3_bucket_name_webapp
@@ -61,6 +67,7 @@ module "dev_ec2_instance" {
   ec2_instance_type         = var.ec2_instance_type
   ec2_termination_disable   = var.ec2_termination_disable
   env                       = var.env
+  key_name                  = module.aws_key_pair.aws_key_pair_name
 }
 
 
@@ -105,4 +112,6 @@ module "codedeploy_ec2_instance" {
   ec2_instance_type         = var.ec2_instance_type
   ec2_termination_disable   = var.ec2_termination_disable
   env                       = var.env
+  key_name                  = module.aws_key_pair.aws_key_pair_name
 }
+

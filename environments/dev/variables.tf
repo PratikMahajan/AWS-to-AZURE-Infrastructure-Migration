@@ -14,6 +14,9 @@ variable "subnet3_name" {}
 variable "vpc_cidr" {}
 variable "vpc_name" {}
 
+# COnfiguration for aws key pair
+variable "ssh_public_key" {}
+
 # Configuration for s3 bucket creation
 variable "s3_bucket_name_webapp" {}
 

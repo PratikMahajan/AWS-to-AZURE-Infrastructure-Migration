@@ -115,3 +115,19 @@ module "codedeploy_ec2_instance" {
   aws_key_pair_name         = module.aws_key_pair.aws_key_pair_name
 }
 
+module "codedeploy_app" {
+  source = "../../modules/codedeploy_application"
+  cd_app_name = var.cd_app_name
+  cd_compute_platform = var.cd_compute_platform
+}
+
+module "codedeploy_group"{
+  source = "../../modules/codedeploy_group"
+  aws_codedeploy_app_name = module.codedeploy_app.codedeploy_app_name
+  aws_iam_service_role_arn = "module."
+  cd_deployment_type = var.cd_deployment_type
+  cd_ec2_tag_key = var.cd_ec2_tag_key
+  cd_ec2_tag_value  = var.cd_ec2_tag_value
+  codedeploy_deployment_config_name  = var.codedeploy_deployment_config_name
+  codedeploy_deployment_group_name  = var.codedeploy_deployment_group_name
+}

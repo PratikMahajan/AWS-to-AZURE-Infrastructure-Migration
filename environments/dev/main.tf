@@ -32,11 +32,11 @@ module "aws_key_pair" {
   ssh_public_key = var.ssh_public_key
 }
 
-module "dev_s3_bucket" {
-  source          = "../../modules/s3_bucket"
-  s3_bucket_name  = var.s3_bucket_name_webapp
-  env             = var.env
-}
+//module "dev_s3_bucket" {
+//  source          = "../../modules/s3_bucket"
+//  s3_bucket_name  = var.s3_bucket_name_webapp
+//  env             = var.env
+//}
 
 //module "dev_rds_instance" {
 //  source                  = "../../modules/rds_database"
@@ -54,21 +54,21 @@ module "dev_s3_bucket" {
 //  db_security_group       = [module.dev_security_group.aws_db_security_group]
 //}
 
-module "dev_ec2_instance" {
-  source                    = "../../modules/ec2_instance"
-  aws_account_id            = var.aws_account_id
-  aws_ec2_security_group    = ["${module.dev_security_group.aws_app_security_group}"]
-  aws_ec2_subnet_id         = module.dev_vps.aws_subnet1_id
-  ebs_block_name            = var.ebs_block_name
-  ebs_delete_on_termination = var.ebs_delete_on_termination
-  ebs_volume_size           = var.ebs_volume_size
-  ebs_volume_type           = var.ebs_volume_type
-  ec2_instance_name         = var.ec2_instance_name_webapp
-  ec2_instance_type         = var.ec2_instance_type
-  ec2_termination_disable   = var.ec2_termination_disable
-  env                       = var.env
-  aws_key_pair_name         = module.aws_key_pair.aws_key_pair_name
-}
+//module "dev_ec2_instance" {
+//  source                    = "../../modules/ec2_instance"
+//  aws_account_id            = var.aws_account_id
+//  aws_ec2_security_group    = ["${module.dev_security_group.aws_app_security_group}"]
+//  aws_ec2_subnet_id         = module.dev_vps.aws_subnet1_id
+//  ebs_block_name            = var.ebs_block_name
+//  ebs_delete_on_termination = var.ebs_delete_on_termination
+//  ebs_volume_size           = var.ebs_volume_size
+//  ebs_volume_type           = var.ebs_volume_type
+//  ec2_instance_name         = var.ec2_instance_name_webapp
+//  ec2_instance_type         = var.ec2_instance_type
+//  ec2_termination_disable   = var.ec2_termination_disable
+//  env                       = var.env
+//  aws_key_pair_name         = module.aws_key_pair.aws_key_pair_name
+//}
 
 
 //module "dev_dynamodb_instance" {
@@ -121,13 +121,14 @@ module "codedeploy_app" {
   cd_compute_platform = var.cd_compute_platform
 }
 
+
 module "codedeploy_group"{
-  source = "../../modules/codedeploy_group"
-  aws_codedeploy_app_name = module.codedeploy_app.codedeploy_app_name
-  aws_iam_service_role_arn = "module."
-  cd_deployment_type = var.cd_deployment_type
-  cd_ec2_tag_key = var.cd_ec2_tag_key
-  cd_ec2_tag_value  = var.cd_ec2_tag_value
-  codedeploy_deployment_config_name  = var.codedeploy_deployment_config_name
+  source                            = "../../modules/codedeploy_group"
+  aws_codedeploy_app_name           = module.codedeploy_app.codedeploy_app_name
+  aws_iam_service_role_arn          = module.iam_ec2_codedeploy_policy_attachment.CodeDeployServiceRole_arn
+  cd_deployment_type                = var.cd_deployment_type
+  cd_ec2_tag_key                    = module.codedeploy_ec2_instance.ec2_tag_name
+  cd_ec2_tag_value                  = module.codedeploy_ec2_instance.ec2_tag_value
   codedeploy_deployment_group_name  = var.codedeploy_deployment_group_name
+  deployment_config_service         = var.deployment_config_service
 }

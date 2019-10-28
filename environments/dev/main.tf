@@ -68,6 +68,15 @@ module "dev_ec2_instance" {
   ec2_termination_disable   = var.ec2_termination_disable
   env                       = var.env
   aws_key_pair_name         = module.aws_key_pair.aws_key_pair_name
+
+  AWS_ACCESS_KEY_ID = var.aws_access_key_id
+  AWS_SECRET_ACCESS_KEY = var.aws_secret_access_key
+  AWS_REGION = var.aws_region
+  DATABASE_NAME = var.db_name
+  DB_HOST = module.dev_rds_instance.RDS_instance_host_address
+  DB_PASSWORD = var.db_password
+  DB_USER = var.db_username
+  RECIPE_S3 = var.s3_bucket_name_webapp
 }
 
 

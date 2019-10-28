@@ -1,5 +1,10 @@
 env = "foo"
 
+# Configuration for AWS
+aws_access_key_id       = "foo"
+aws_secret_access_key   = "foo"
+
+
 # Variables for VPC creation
 aws_region = "foo"
 subnet1_az = "foo"

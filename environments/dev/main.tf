@@ -97,8 +97,9 @@ module "circle_codedeploy_policy" {
 
 module "iam_ec2_codedeploy_policy_attachment" {
   source = "../../modules/ec2_iam_attachment"
-  aws_CircleCI-Code-Deploy_policy = module.circle_codedeploy_policy.aws_CircleCI-Code-Deploy_policy
-  aws_CodeDeploy-EC2-S3_policy = module.circle_codedeploy_policy.aws_CodeDeploy-EC2-S3_policy
+  aws_CircleCI-Code-Deploy_policy     = module.circle_codedeploy_policy.aws_CircleCI-Code-Deploy_policy
+  aws_CodeDeploy-EC2-S3_policy        = module.circle_codedeploy_policy.aws_CodeDeploy-EC2-S3_policy
+  aws_CodeDeploy-EC2-S3_KMS_policy    = module.circle_codedeploy_policy.EC2_KMS_ACCESS_POLICY
 }
 
 module "codedeploy_s3_bucket" {

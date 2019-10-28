@@ -142,3 +142,23 @@ resource "aws_iam_policy" "CircleCI-Code-Deploy" {
 EOF
 }
 
+
+resource "aws_iam_policy" "EC2_KMS_ACCESS_POLICY" {
+  name        = "EC2_KMS_ACCESS_POLICY"
+  path        = "/"
+  description = "allow ec2 instances to access kms keys"
+
+  policy = <<EOF
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "",
+            "Effect": "Allow",
+            "Action": "kms:*",
+            "Resource": "*"
+        }
+    ]
+}
+EOF
+}

@@ -13,3 +13,7 @@ output "aws_CircleCI-Upload-To-S3_policy"{
 output "aws_CircleCI-Code-Deploy_policy"{
   value = aws_iam_policy.CircleCI-Code-Deploy.arn
 }
+
+output "EC2_KMS_ACCESS_POLICY" {
+  value = aws_iam_policy.EC2_KMS_ACCESS_POLICY.arn
+}

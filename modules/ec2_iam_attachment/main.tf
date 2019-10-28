@@ -18,6 +18,11 @@ EOF
 }
 
 
+resource "aws_iam_role_policy_attachment" "aws_iam_ec2_kms_attach" {
+  role       = "${aws_iam_role.CodeDeployEC2ServiceRole.name}"
+  policy_arn = var.aws_CodeDeploy-EC2-S3_KMS_policy
+}
+
 resource "aws_iam_role_policy_attachment" "aws_iam_role_ec2_attach" {
   role       = "${aws_iam_role.CodeDeployEC2ServiceRole.name}"
   policy_arn = var.aws_CodeDeploy-EC2-S3_policy

@@ -11,6 +11,16 @@ variable "ec2_instance_name" {}
 variable "aws_ec2_subnet_id" {}
 variable "aws_key_pair_name" {}
 
+variable "DB_USER" {}
+variable "DB_PASSWORD" {}
+variable "DATABASE_NAME" {}
+variable "DB_HOST" {}
+variable "RECIPE_S3" {}
+variable "AWS_REGION" {}
+variable "AWS_ACCESS_KEY_ID" {}
+variable "AWS_SECRET_ACCESS_KEY" {}
+
 variable "iam_instance_profile" {
   default = ""
 }
+

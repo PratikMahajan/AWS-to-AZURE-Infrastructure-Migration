@@ -15,6 +15,10 @@ variable "vpc_cidr" {}
 variable "vpc_name" {}
 
 
+# COnfiguration for aws key pair
+variable "ssh_public_key" {}
+
+
 # Configuration for s3 bucket creation
 variable "s3_bucket_name" {}
 
@@ -44,3 +48,22 @@ variable "ec2_instance_name" {}
 # Configuring DynamoDB instance
 variable "dynamo_billing_mode" {}
 variable "dynamo_table_name" {}
+
+
+# Configuring circleci_codedeploy iam policy
+variable "application_name" {}
+
+# Configuration for s3 bucket for codedeploy
+variable "s3_bucket_name_codedeploy" {}
+
+# Configuring codedeploy ec2instance
+variable "ec2_instance_name_codedeploy" {}
+
+# Configuring codedeploy app
+variable "cd_compute_platform" {}
+variable "cd_app_name" {}
+
+# Configuring codedeploy group
+variable "codedeploy_deployment_group_name" {}
+variable "cd_deployment_type" {}
+variable "deployment_config_service" {}

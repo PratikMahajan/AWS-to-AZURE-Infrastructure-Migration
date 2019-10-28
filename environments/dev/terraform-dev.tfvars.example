@@ -49,3 +49,14 @@ application_name = "foo"
 # Variables for codedeploy s2
 s3_bucket_name_codedeploy = "foo"
 
+# Variable for EC2 codedeploy instance
+ec2_instance_name_codedeploy  = "foo"
+
+# variables for codedeploy app
+cd_app_name             = "foo"
+cd_compute_platform     = "foo"
+
+# Variables for codedeploy group
+cd_deployment_type                  = "foo"
+codedeploy_deployment_group_name    = "foo"
+deployment_config_service           = "foo"

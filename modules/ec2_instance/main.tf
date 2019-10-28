@@ -21,10 +21,10 @@ export DB_USER=${var.DB_USER}
 export DB_PASSWORD=${var.DB_PASSWORD}
 export DATABASE_NAME=${var.DATABASE_NAME}
 export DB_HOST=${var.DB_HOST}
-export RECIPE_S3 = ${var.RECIPE_S3}
-export AWS_REGION = ${var.AWS_REGION}
-export AWS_ACCESS_KEY_ID = ${var.AWS_ACCESS_KEY_ID}
-export AWS_SECRET_ACCESS_KEY = ${var.AWS_SECRET_ACCESS_KEY}
+export RECIPE_S3=${var.RECIPE_S3}
+export AWS_REGION=${var.AWS_REGION}
+export AWS_ACCESS_KEY_ID=${var.AWS_ACCESS_KEY_ID}
+export AWS_SECRET_ACCESS_KEY=${var.AWS_SECRET_ACCESS_KEY}
 	EOF
 
   ebs_block_device {

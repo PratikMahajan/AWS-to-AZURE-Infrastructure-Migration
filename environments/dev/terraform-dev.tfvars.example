@@ -20,7 +20,7 @@ vpc_cidr = "foo"
 vpc_name = "foo"
 
 # Variables for Database
-s3_bucket_name = foo
+s3_bucket_name_webapp = foo
 
 # Variables for RDS database instance
 db_identifier           = "foo"
@@ -51,7 +51,7 @@ dynamo_table_name     = "foo"
 # variables for circleci-codedeploy policy
 application_name = "foo"
 
-# Variables for codedeploy s2
+# Variables for codedeploy s3
 s3_bucket_name_codedeploy = "foo"
 
 # Variable for EC2 codedeploy instance

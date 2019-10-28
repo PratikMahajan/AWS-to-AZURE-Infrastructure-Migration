@@ -18,9 +18,12 @@ variable "vpc_name" {}
 # COnfiguration for aws key pair
 variable "ssh_public_key" {}
 
+# Configuration for AWS
+variable "aws_access_key_id" {}
+variable "aws_secret_access_key" {}
 
 # Configuration for s3 bucket creation
-variable "s3_bucket_name" {}
+variable "s3_bucket_name_webapp" {}
 
 # Configuring database
 variable "database_engine_version" {}

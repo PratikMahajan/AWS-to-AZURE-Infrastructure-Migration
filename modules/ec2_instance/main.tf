@@ -17,16 +17,21 @@ resource "aws_instance" "webec2" {
 
   user_data = <<EOF
 #! /bin/bash
-export DB_USER=${var.DB_USER}
-export DB_PASSWORD=${var.DB_PASSWORD}
-export DATABASE_NAME=${var.DATABASE_NAME}
-export DB_HOST=${var.DB_HOST}
-export RECIPE_S3=${var.RECIPE_S3}
-export AWS_REGION=${var.AWS_REGION}
-export AWS_DEFAULT_REGION=${var.AWS_REGION}
-export AWS_ACCESS_KEY_ID=${var.AWS_ACCESS_KEY_ID}
-export AWS_SECRET_ACCESS_KEY=${var.AWS_SECRET_ACCESS_KEY}
-	EOF
+read -d '' data <<DTA
+DB_USER=${var.DB_USER}
+DB_PASSWORD=${var.DB_PASSWORD}
+DATABASE_NAME=${var.DATABASE_NAME}
+DB_HOST=${var.DB_HOST}
+RECIPE_S3=${var.RECIPE_S3}
+AWS_REGION=${var.AWS_REGION}
+AWS_DEFAULT_REGION=${var.AWS_REGION}
+AWS_ACCESS_KEY_ID=${var.AWS_ACCESS_KEY_ID}
+AWS_SECRET_ACCESS_KEY=${var.AWS_SECRET_ACCESS_KEY}
+DTA
+
+sudo echo "$data" >> /etc/environment
+source /etc/environment
+EOF
 
   ebs_block_device {
     device_name           = var.ebs_block_name

@@ -127,6 +127,11 @@ module "codedeploy_ec2_instance" {
   AWS_ACCESS_KEY_ID         = var.aws_access_key_id
   AWS_SECRET_ACCESS_KEY     = var.aws_secret_access_key
   AWS_REGION                = var.aws_region
+  DATABASE_NAME = var.db_name
+  DB_HOST = module.dev_rds_instance.RDS_instance_host_address
+  DB_PASSWORD = var.db_password
+  DB_USER = var.db_username
+  RECIPE_S3 = var.s3_bucket_name_webapp
 }
 
 module "codedeploy_app" {

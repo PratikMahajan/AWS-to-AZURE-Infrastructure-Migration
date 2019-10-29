@@ -54,30 +54,30 @@ module "dev_rds_instance" {
   db_security_group       = [module.dev_security_group.aws_db_security_group]
 }
 
-module "dev_ec2_instance" {
-  source                    = "../../modules/ec2_instance"
-  aws_account_id            = var.aws_account_id
-  aws_ec2_security_group    = ["${module.dev_security_group.aws_app_security_group}"]
-  aws_ec2_subnet_id         = module.dev_vps.aws_subnet1_id
-  ebs_block_name            = var.ebs_block_name
-  ebs_delete_on_termination = var.ebs_delete_on_termination
-  ebs_volume_size           = var.ebs_volume_size
-  ebs_volume_type           = var.ebs_volume_type
-  ec2_instance_name         = var.ec2_instance_name_webapp
-  ec2_instance_type         = var.ec2_instance_type
-  ec2_termination_disable   = var.ec2_termination_disable
-  env                       = var.env
-  aws_key_pair_name         = module.aws_key_pair.aws_key_pair_name
-
-  AWS_ACCESS_KEY_ID = var.aws_access_key_id
-  AWS_SECRET_ACCESS_KEY = var.aws_secret_access_key
-  AWS_REGION = var.aws_region
-  DATABASE_NAME = var.db_name
-  DB_HOST = module.dev_rds_instance.RDS_instance_host_address
-  DB_PASSWORD = var.db_password
-  DB_USER = var.db_username
-  RECIPE_S3 = var.s3_bucket_name_webapp
-}
+//module "dev_ec2_instance" {
+//  source                    = "../../modules/ec2_instance"
+//  aws_account_id            = var.aws_account_id
+//  aws_ec2_security_group    = ["${module.dev_security_group.aws_app_security_group}"]
+//  aws_ec2_subnet_id         = module.dev_vps.aws_subnet1_id
+//  ebs_block_name            = var.ebs_block_name
+//  ebs_delete_on_termination = var.ebs_delete_on_termination
+//  ebs_volume_size           = var.ebs_volume_size
+//  ebs_volume_type           = var.ebs_volume_type
+//  ec2_instance_name         = var.ec2_instance_name_webapp
+//  ec2_instance_type         = var.ec2_instance_type
+//  ec2_termination_disable   = var.ec2_termination_disable
+//  env                       = var.env
+//  aws_key_pair_name         = module.aws_key_pair.aws_key_pair_name
+//
+//  AWS_ACCESS_KEY_ID       = var.aws_access_key_id
+//  AWS_SECRET_ACCESS_KEY   = var.aws_secret_access_key
+//  AWS_REGION              = var.aws_region
+//  DATABASE_NAME           = var.db_name
+//  DB_HOST                 = module.dev_rds_instance.RDS_instance_host_address
+//  DB_PASSWORD             = var.db_password
+//  DB_USER                 = var.db_username
+//  RECIPE_S3               = var.s3_bucket_name_webapp
+//}
 
 
 module "dev_dynamodb_instance" {
@@ -127,11 +127,11 @@ module "codedeploy_ec2_instance" {
   AWS_ACCESS_KEY_ID         = var.aws_access_key_id
   AWS_SECRET_ACCESS_KEY     = var.aws_secret_access_key
   AWS_REGION                = var.aws_region
-  DATABASE_NAME = var.db_name
-  DB_HOST = module.dev_rds_instance.RDS_instance_host_address
-  DB_PASSWORD = var.db_password
-  DB_USER = var.db_username
-  RECIPE_S3 = var.s3_bucket_name_webapp
+  DATABASE_NAME         = var.db_name
+  DB_HOST               = module.dev_rds_instance.RDS_instance_host_address
+  DB_PASSWORD           = var.db_password
+  DB_USER               = var.db_username
+  RECIPE_S3             = var.s3_bucket_name_webapp
 }
 
 module "codedeploy_app" {

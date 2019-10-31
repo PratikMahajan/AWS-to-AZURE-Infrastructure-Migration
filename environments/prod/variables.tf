@@ -1,9 +1,5 @@
 variable "env" {}
 
-# Configuration for AWS
-variable "aws_access_key_id" {} 
-variable "aws_secret_access_key" {}
-
 # Configuration for VPC
 variable "aws_region" {}
 variable "subnet1_az" {}

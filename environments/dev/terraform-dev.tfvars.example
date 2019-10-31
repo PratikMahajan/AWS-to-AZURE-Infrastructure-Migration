@@ -22,6 +22,9 @@ vpc_name = "foo"
 # Variables for Database
 s3_bucket_name_webapp = foo
 
+# Variables for aws Key pair
+ssh_public_key = "foo"
+
 # Variables for RDS database instance
 db_identifier           = "foo"
 allocated_storage       = "foo"

@@ -87,12 +87,6 @@ module "codedeploy_s3_bucket" {
 }
 
 
-module "lambda_s3_bucket" {
-  source         = "../../modules/s3_bucket"
-  env            = var.env
-  s3_bucket_name = var.s3_bucket_name_lambda
-}
-
 module "codedeploy_ec2_instance" {
   source                    = "../../modules/ec2_instance"
   aws_account_id            = var.aws_account_id
@@ -136,3 +130,11 @@ module "ec2_codedeploy_group"{
   codedeploy_deployment_group_name  = var.codedeploy_deployment_group_name
   deployment_config_service         = var.deployment_config_service
 }
+
+
+module "lambda_s3_bucket" {
+  source         = "../../modules/s3_bucket"
+  env            = var.env
+  s3_bucket_name = var.s3_bucket_name_lambda
+}
+

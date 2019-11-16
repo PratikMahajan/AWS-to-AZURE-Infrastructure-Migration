@@ -70,3 +70,6 @@ variable "cd_app_name" {}
 variable "codedeploy_deployment_group_name" {}
 variable "cd_deployment_type" {}
 variable "deployment_config_service" {}
+
+# configuring lambda s3 bucket
+variable "s3_bucket_name_lambda" {}

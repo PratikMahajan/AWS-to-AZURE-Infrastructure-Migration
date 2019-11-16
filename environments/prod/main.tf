@@ -58,32 +58,6 @@ module "prod_rds_instance" {
 }
 
 
-//module "prod_ec2_instance" {
-//  source                    = "../../modules/ec2_instance"
-//  aws_account_id            = var.aws_account_id
-//  aws_ec2_security_group    = ["${module.prod_security_group.aws_app_security_group}"]
-//  aws_ec2_subnet_id         = module.prod_vps.aws_subnet1_id
-//  ebs_block_name            = var.ebs_block_name
-//  ebs_delete_on_termination = var.ebs_delete_on_termination
-//  ebs_volume_size           = var.ebs_volume_size
-//  ebs_volume_type           = var.ebs_volume_type
-//  ec2_instance_name         = var.ec2_instance_name
-//  ec2_instance_type         = var.ec2_instance_type
-//  ec2_termination_disable   = var.ec2_termination_disable
-//  env                       = var.env
-//  aws_key_pair_name         = module.aws_key_pair.aws_key_pair_name
-//
-//  AWS_ACCESS_KEY_ID = var.aws_access_key_id
-//  AWS_SECRET_ACCESS_KEY = var.aws_secret_access_key
-//  AWS_REGION = var.aws_region
-//  DATABASE_NAME = var.db_name
-//  DB_HOST = module.prod_rds_instance.RDS_instance_host_address
-//  DB_PASSWORD = var.db_password
-//  DB_USER = var.db_username
-//  RECIPE_S3 = var.s3_bucket_name_webapp
-//}
-
-
 module "prod_dynamodb_instance" {
   source              = "../../modules/dynamodb_instance"
   dynamo_billing_mode = var.dynamo_billing_mode

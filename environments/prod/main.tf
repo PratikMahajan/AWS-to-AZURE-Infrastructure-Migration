@@ -66,7 +66,6 @@ module "prod_dynamodb_instance" {
 }
 
 
-
 module "circle_codedeploy_policy" {
   source = "../../modules/iam_circleci"
   account_id = var.aws_account_id
@@ -86,6 +85,7 @@ module "codedeploy_s3_bucket" {
   s3_bucket_name  = var.s3_bucket_name_codedeploy
   env             = var.env
 }
+
 
 module "codedeploy_ec2_instance" {
   source                    = "../../modules/ec2_instance"

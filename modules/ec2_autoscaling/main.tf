@@ -1,19 +1,13 @@
-data "aws_ami" "centos" {
-  most_recent = true
-  owners = ["${var.aws_account_id}"]
-}
-
-// AWS INSTANCE WITHOUT AUTOSCALING
-resource "aws_instance" "webec2" {
-  ami                     = data.aws_ami.centos.id
-  instance_type           = var.ec2_instance_type
-  disable_api_termination = var.ec2_termination_disable
+resource "aws_instance" "ec2_loadbalanced_instance" {
+  ami                       = data.aws_ami.centos.id
+  instance_type             = var.ec2_instance_type
+  disable_api_termination   = var.ec2_termination_disable
 
   vpc_security_group_ids  = var.aws_ec2_security_group
   subnet_id               = var.aws_ec2_subnet_id
 
-  key_name                = var.aws_key_pair_name
-  iam_instance_profile    = var.iam_instance_profile
+  key_name                  = var.aws_key_pair_name
+  iam_instance_profile      = var.iam_instance_profile
 
   user_data = <<EOF
 #! /bin/bash
@@ -46,4 +40,6 @@ EOF
     ENV  = var.env
 
   }
+
+
 }

@@ -18,3 +18,13 @@ variable "aws_key_pair_name" {}
 variable "aws_account_id" {}
 variable "public_ip_address" {}
 variable "cooldown_period" {}
+
+
+variable "DB_USER" {}
+variable "DB_PASSWORD" {}
+variable "DATABASE_NAME" {}
+variable "DB_HOST" {}
+variable "RECIPE_S3" {}
+variable "AWS_REGION" {}
+variable "AWS_ACCESS_KEY_ID" {}
+variable "AWS_SECRET_ACCESS_KEY" {}

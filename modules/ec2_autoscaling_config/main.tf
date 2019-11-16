@@ -16,6 +16,24 @@ resource "aws_launch_configuration" "asg_launch_config" {
 
   associate_public_ip_address = var.public_ip_address
 
+  user_data = <<EOF
+#! /bin/bash
+read -d '' data <<DTA
+DB_USER=${var.DB_USER}
+DB_PASSWORD=${var.DB_PASSWORD}
+DATABASE_NAME=${var.DATABASE_NAME}
+DB_HOST=${var.DB_HOST}
+RECIPE_S3=${var.RECIPE_S3}
+AWS_REGION=${var.AWS_REGION}
+AWS_DEFAULT_REGION=${var.AWS_REGION}
+AWS_ACCESS_KEY_ID=${var.AWS_ACCESS_KEY_ID}
+AWS_SECRET_ACCESS_KEY=${var.AWS_SECRET_ACCESS_KEY}
+DTA
+
+sudo echo "$data" >> /etc/environment
+source /etc/environment
+EOF
+
   ebs_block_device {
     device_name           = var.ebs_block_name
 

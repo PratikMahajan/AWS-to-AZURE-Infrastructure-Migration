@@ -119,16 +119,16 @@ module "codedeploy_ec2_instance" {
   RECIPE_S3             = var.s3_bucket_name_webapp
 }
 
-module "codedeploy_app" {
+module "ec2_codedeploy_app" {
   source = "../../modules/codedeploy_application"
   cd_app_name = var.cd_app_name
   cd_compute_platform = var.cd_compute_platform
 }
 
 
-module "codedeploy_group"{
+module "ec2_codedeploy_group"{
   source                            = "../../modules/codedeploy_group"
-  aws_codedeploy_app_name           = module.codedeploy_app.codedeploy_app_name
+  aws_codedeploy_app_name           = module.ec2_codedeploy_app.codedeploy_app_name
   aws_iam_service_role_arn          = module.iam_ec2_codedeploy_policy_attachment.CodeDeployServiceRole_arn
   cd_deployment_type                = var.cd_deployment_type
   cd_ec2_tag_key                    = module.codedeploy_ec2_instance.ec2_tag_name

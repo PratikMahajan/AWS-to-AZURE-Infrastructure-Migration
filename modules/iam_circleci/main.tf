@@ -162,3 +162,24 @@ resource "aws_iam_policy" "EC2_KMS_ACCESS_POLICY" {
 }
 EOF
 }
+
+
+resource "aws_iam_user_policy_attachment" "attach_circleci-ec2-ami" {
+  user       = var.circleci_user_name
+  policy_arn = aws_iam_policy.circleci-ec2-ami.arn
+}
+
+resource "aws_iam_user_policy_attachment" "attach_CodeDeploy-EC2-S3" {
+  user       = var.circleci_user_name
+  policy_arn = aws_iam_policy.CodeDeploy-EC2-S3.arn
+}
+
+resource "aws_iam_user_policy_attachment" "attach_CircleCI-Upload-To-S3" {
+  user       = var.circleci_user_name
+  policy_arn = aws_iam_policy.CircleCI-Upload-To-S3.arn
+}
+
+resource "aws_iam_user_policy_attachment" "attach_CircleCI-Code-Deploy" {
+  user       = var.circleci_user_name
+  policy_arn = aws_iam_policy.CircleCI-Code-Deploy.arn
+}

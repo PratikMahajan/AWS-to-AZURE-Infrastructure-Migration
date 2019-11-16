@@ -55,6 +55,7 @@ variable "dynamo_table_name" {}
 
 # Configuring circleci_codedeploy iam policy
 variable "application_name" {}
+variable "circleci_user_name" {}
 
 # Configuration for s3 bucket for codedeploy
 variable "s3_bucket_name_codedeploy" {}

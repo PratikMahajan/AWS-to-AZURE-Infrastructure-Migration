@@ -194,7 +194,7 @@ module "ec2_codedeploy_group_loadbalancer" {
   aws_codedeploy_app_name           = module.ec2_codedeploy_app.codedeploy_app_name
   aws_iam_service_role_arn          = module.iam_ec2_codedeploy_policy_attachment.CodeDeployServiceRole_arn
   codedeploy_deployment_group_name  = var.codedeploy_deployment_group_name
-  target_group_info                 = module.ec2_loadbalancer.lb_name
+  target_group_info                 = module.ec2_loadbalancer.loadbalancer_target_group_name
   cd_deployment_type          = var.cd_deployment_type
   deployment_config_service   = var.deployment_config_service
   autoscaling_groups          = [module.ec2_autoscaling.autoscaling_group_name]

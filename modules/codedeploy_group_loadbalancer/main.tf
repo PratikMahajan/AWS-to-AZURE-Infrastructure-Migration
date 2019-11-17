@@ -21,6 +21,6 @@ resource "aws_codedeploy_deployment_group" "example" {
 
   deployment_style {
     deployment_type   = var.cd_deployment_type
-    deployment_option = "WITHOUT_TRAFFIC_CONTROL"
+    deployment_option = "WITH_TRAFFIC_CONTROL"
   }
 }

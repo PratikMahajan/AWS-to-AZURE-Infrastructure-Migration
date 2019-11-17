@@ -156,6 +156,9 @@ module "ec2_autoscaling" {
   DB_PASSWORD               = var.db_password
   DB_USER                   = var.db_username
   RECIPE_S3                 = var.s3_bucket_name_webapp
+
+  ssl_cert  = var.ssl_cert
+  ssl_key   = var.ssl_key
 }
 
 

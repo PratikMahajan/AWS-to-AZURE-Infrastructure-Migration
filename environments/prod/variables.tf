@@ -58,6 +58,9 @@ variable "availability_zones" {}
 variable "cooldown_period" {}
 variable "public_ip_address" {}
 
+variable "ssl_cert" {}
+variable "ssl_key" {}
+
 # Configuring DynamoDB instance
 variable "dynamo_billing_mode" {}
 variable "dynamo_table_name" {}

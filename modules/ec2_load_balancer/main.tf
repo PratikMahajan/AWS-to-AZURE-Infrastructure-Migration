@@ -14,7 +14,7 @@ resource "aws_lb" "loadbalancer" {
 
 
 resource "aws_lb_target_group" "lb_target_group" {
-  name     = "ec2_recipe_lb_target_group"
+  name     = "ec2-recipe-lb-target-group"
   port     = 443
   protocol = "HTTPS"
   vpc_id   = var.aws_vpc_id
@@ -25,7 +25,7 @@ resource "aws_lb_listener" "lb_listner" {
   port              = "443"
   protocol          = "HTTPS"
   ssl_policy        = "ELBSecurityPolicy-2016-08"
-  certificate_arn   = "arn:aws:iam::187416307283:server-certificate/test_cert_rab3wuqwgja25ct3n4jdj2tzu4"
+  certificate_arn   =  var.certificate_arn
 
   default_action {
     type             = "forward"

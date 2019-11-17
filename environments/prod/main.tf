@@ -158,13 +158,17 @@ module "ec2_autoscaling" {
   RECIPE_S3                 = var.s3_bucket_name_webapp
 }
 
+
 module "ec2_loadbalancer" {
   source            = "../../modules/ec2_load_balancer"
   env               = var.env
   lb_security_group = ["${module.prod_security_group.aws_lb_security_group}"]
   lb_subnets        = ["${module.prod_vps.aws_subnet1_id}","${module.prod_vps.aws_subnet2_id}"]
   loadbalancer_name = var.loadbalancer_name
+  aws_vpc_id        = module.prod_vps.vpc_id
+  certificate_arn   = var.ssl_certificate_arn
 }
+
 
 module "ec2_codedeploy_app" {
   source              = "../../modules/codedeploy_application"

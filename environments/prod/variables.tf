@@ -84,6 +84,7 @@ variable "deployment_config_service" {}
 
 #configuring loadbalancer
 variable "loadbalancer_name" {}
+variable "ssl_certificate_arn" {}
 
 # configuring lambda s3 bucket
 variable "s3_bucket_name_lambda" {}

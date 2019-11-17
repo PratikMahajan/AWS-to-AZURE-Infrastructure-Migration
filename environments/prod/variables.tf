@@ -48,6 +48,16 @@ variable "ec2_termination_disable" {}
 variable "ec2_instance_type" {}
 variable "ec2_instance_name" {}
 
+variable "aws_asg_name" {}
+variable "asg_desired_capacity" {}
+variable "asg_force_delete" {}
+variable "asg_launch_config_name" {}
+variable "asg_max_size" {}
+variable "asg_min_size" {}
+variable "availability_zones" {}
+variable "cooldown_period" {}
+variable "public_ip_address" {}
+
 # Configuring DynamoDB instance
 variable "dynamo_billing_mode" {}
 variable "dynamo_table_name" {}

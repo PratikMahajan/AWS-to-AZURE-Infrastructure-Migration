@@ -4,6 +4,7 @@ provider "aws" {
   profile                 = "prod"
 }
 
+
 module "prod_vps"{
   source          = "../../modules/vpc"
   env             = var.env
@@ -20,6 +21,7 @@ module "prod_vps"{
   vpc_cidr        = var.vpc_cidr
   vpc_name        = var.vpc_name
 }
+
 
 module "prod_security_group"{
   source          = "../../modules/security_group"
@@ -82,6 +84,7 @@ module "iam_ec2_codedeploy_policy_attachment" {
   aws_CodeDeploy-EC2-S3_KMS_policy  = module.circle_codedeploy_policy.EC2_KMS_ACCESS_POLICY
 }
 
+
 module "codedeploy_s3_bucket" {
   source          = "../../modules/s3_bucket"
   s3_bucket_name  = var.s3_bucket_name_codedeploy
@@ -114,6 +117,47 @@ module "codedeploy_s3_bucket" {
 //  DB_USER               = var.db_username
 //  RECIPE_S3             = var.s3_bucket_name_webapp
 //}
+
+
+module "ec2_loadbalanced" {
+  source                    = "../../modules/ec2_autoscaling_config"
+  env                       = var.env
+  aws_key_pair_name         = module.aws_key_pair.aws_key_pair_name
+
+  ec2_instance_name         = var.ec2_instance_name_codedeploy
+  instance_type             = var.ec2_instance_type
+
+  aws_ec2_security_group    = ["${module.prod_security_group.aws_app_security_group}"]
+  iam_instance_profile      = module.iam_ec2_codedeploy_policy_attachment.CodeDeployEC2ServiceRoleInstance
+
+  ebs_block_name            = var.ebs_block_name
+  ebs_delete_on_termination = var.ebs_delete_on_termination
+  ebs_volume_size           = var.ebs_volume_size
+  ebs_volume_type           = var.ebs_volume_type
+
+  aws_account_id            = var.aws_account_id
+  
+  aws_asg_name              = var.aws_asg_name
+  asg_desired_capacity      = var.asg_desired_capacity
+  asg_force_delete          = var.asg_force_delete
+  asg_launch_config_name    = var.asg_launch_config_name
+  asg_max_size              = var.asg_max_size
+  asg_min_size              = var.asg_min_size
+  availability_zones        = var.availability_zones
+  cooldown_period           = var.cooldown_period
+
+  public_ip_address         = var.public_ip_address
+
+  AWS_ACCESS_KEY_ID         = var.aws_access_key_id
+  AWS_REGION                = var.aws_region
+  AWS_SECRET_ACCESS_KEY     = var.aws_secret_access_key
+  DATABASE_NAME             = var.db_name
+  DB_HOST                   = module.prod_rds_instance.RDS_instance_host_address
+  DB_PASSWORD               = var.db_password
+  DB_USER                   = var.db_username
+  RECIPE_S3                 = var.s3_bucket_name_webapp
+}
+
 
 module "ec2_codedeploy_app" {
   source              = "../../modules/codedeploy_application"

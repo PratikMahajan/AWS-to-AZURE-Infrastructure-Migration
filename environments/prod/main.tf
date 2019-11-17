@@ -166,17 +166,24 @@ module "ec2_codedeploy_app" {
 }
 
 
-module "ec2_codedeploy_group"{
-  source                            = "../../modules/codedeploy_group"
+//module "ec2_codedeploy_group"{
+//  source                            = "../../modules/codedeploy_group"
+//  aws_codedeploy_app_name           = module.ec2_codedeploy_app.codedeploy_app_name
+//  aws_iam_service_role_arn          = module.iam_ec2_codedeploy_policy_attachment.CodeDeployServiceRole_arn
+//  cd_deployment_type                = var.cd_deployment_type
+//  cd_ec2_tag_key                    = module.codedeploy_ec2_instance.ec2_tag_name
+//  cd_ec2_tag_value                  = module.codedeploy_ec2_instance.ec2_tag_value
+//  codedeploy_deployment_group_name  = var.codedeploy_deployment_group_name
+//  deployment_config_service         = var.deployment_config_service
+//}
+
+module "ec2_codedeploy_group_loadbalancer" {
+  source                            = "../../modules/codedeploy_group_loadbalancer"
   aws_codedeploy_app_name           = module.ec2_codedeploy_app.codedeploy_app_name
   aws_iam_service_role_arn          = module.iam_ec2_codedeploy_policy_attachment.CodeDeployServiceRole_arn
-  cd_deployment_type                = var.cd_deployment_type
-  cd_ec2_tag_key                    = module.ec2_loadbalanced.ec2_tag_name
-  cd_ec2_tag_value                  = module.ec2_loadbalanced.ec2_tag_value
   codedeploy_deployment_group_name  = var.codedeploy_deployment_group_name
-  deployment_config_service         = var.deployment_config_service
+  target_group_info                 = module.ec2_loadbalanced.autoscaling_group_name
 }
-
 
 module "lambda_s3_bucket" {
   source         = "../../modules/s3_bucket"

@@ -31,16 +31,6 @@ AWS_SECRET_ACCESS_KEY=${var.AWS_SECRET_ACCESS_KEY}
 DTA
 
 sudo echo "$data" >> /etc/environment
-read -d '' CERT <<EOC
-${var.ssl_cert}
-EOC
-read -d '' KEY <<EOC
-${var.ssl_key}
-EOC
-
-mkdir /home/centos/cert
-sudo echo "$CERT" >> /home/centos/cert/cert.pem
-sudo echo "$KEY" >> /home/centos/cert/key.pem
 source /etc/environment
 EOF
 

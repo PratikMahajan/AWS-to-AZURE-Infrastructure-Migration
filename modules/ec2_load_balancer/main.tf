@@ -5,7 +5,7 @@ resource "aws_lb" "loadbalancer" {
   security_groups    = var.lb_security_group
   subnets            = var.lb_subnets
 
-  enable_deletion_protection = true
+  enable_deletion_protection = false
 
   tags = {
     env = var.env

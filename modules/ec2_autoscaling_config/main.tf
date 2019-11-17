@@ -42,11 +42,6 @@ EOF
     delete_on_termination = var.ebs_delete_on_termination
   }
 
-  tags = {
-    Name = "${var.ec2_instance_name}"
-    ENV  = var.env
-
-  }
 }
 
 
@@ -57,7 +52,7 @@ resource "aws_autoscaling_group" "asg" {
   max_size           = var.asg_max_size
   min_size           = var.asg_min_size
   force_delete       = var.asg_force_delete
-  default_cool_down  = var.cooldown_period
+  default_cooldown   = var.cooldown_period
 
   launch_configuration   = aws_launch_configuration.asg_launch_config.name
 }

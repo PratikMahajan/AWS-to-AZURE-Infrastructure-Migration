@@ -158,6 +158,13 @@ module "ec2_loadbalanced" {
   RECIPE_S3                 = var.s3_bucket_name_webapp
 }
 
+module "ec2_loadbalancer" {
+  source            = "../../modules/ec2_load_balancer"
+  env               = var.env
+  lb_security_group = ["${module.prod_security_group.aws_app_security_group}"]
+  lb_subnets        = ["${module.prod_vps.aws_subnet1_id}"]
+  loadbalancer_name = var.loadbalancer_name
+}
 
 module "ec2_codedeploy_app" {
   source              = "../../modules/codedeploy_application"

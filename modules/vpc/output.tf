@@ -7,9 +7,9 @@ output "aws_subnet1_id"{
 }
 
 output "aws_subnet2_id"{
-  value = aws_subnet.private-subnet1.id
+  value = aws_subnet.public-subnet2.id
 }
 
 output "aws_subnet3_id"{
-  value = aws_subnet.private-subnet2.id
+  value = aws_subnet.private-subnet1.id
 }

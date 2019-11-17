@@ -119,7 +119,7 @@ module "codedeploy_s3_bucket" {
 //}
 
 
-module "ec2_loadbalanced" {
+module "ec2_autoscaling" {
   source                    = "../../modules/ec2_autoscaling_config"
   env                       = var.env
   aws_key_pair_name         = module.aws_key_pair.aws_key_pair_name
@@ -162,7 +162,7 @@ module "ec2_loadbalancer" {
   source            = "../../modules/ec2_load_balancer"
   env               = var.env
   lb_security_group = ["${module.prod_security_group.aws_app_security_group}"]
-  lb_subnets        = ["${module.prod_vps.aws_subnet1_id}"]
+  lb_subnets        = ["${module.prod_vps.aws_subnet1_id}","${module.prod_vps.aws_subnet2_id}"]
   loadbalancer_name = var.loadbalancer_name
 }
 
@@ -189,7 +189,7 @@ module "ec2_codedeploy_group_loadbalancer" {
   aws_codedeploy_app_name           = module.ec2_codedeploy_app.codedeploy_app_name
   aws_iam_service_role_arn          = module.iam_ec2_codedeploy_policy_attachment.CodeDeployServiceRole_arn
   codedeploy_deployment_group_name  = var.codedeploy_deployment_group_name
-  target_group_info                 = module.ec2_loadbalanced.autoscaling_group_name
+  target_group_info                 = module.ec2_loadbalancer.lb_name
 }
 
 module "lambda_s3_bucket" {

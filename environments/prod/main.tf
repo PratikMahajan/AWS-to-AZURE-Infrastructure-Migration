@@ -161,7 +161,7 @@ module "ec2_autoscaling" {
 module "ec2_loadbalancer" {
   source            = "../../modules/ec2_load_balancer"
   env               = var.env
-  lb_security_group = ["${module.prod_security_group.aws_app_security_group}"]
+  lb_security_group = ["${module.prod_security_group.aws_lb_security_group}"]
   lb_subnets        = ["${module.prod_vps.aws_subnet1_id}","${module.prod_vps.aws_subnet2_id}"]
   loadbalancer_name = var.loadbalancer_name
 }

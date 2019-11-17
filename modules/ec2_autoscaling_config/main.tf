@@ -9,7 +9,7 @@ resource "aws_launch_configuration" "asg_launch_config" {
   image_id                    = data.aws_ami.centos.id
   instance_type               = var.instance_type
 
-  security_group              = var.aws_ec2_security_group
+  security_groups             = var.aws_ec2_security_group
 
   key_name                    = var.aws_key_pair_name
   iam_instance_profile        = var.iam_instance_profile

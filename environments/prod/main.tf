@@ -143,7 +143,7 @@ module "ec2_autoscaling" {
   asg_launch_config_name    = var.asg_launch_config_name
   asg_max_size              = var.asg_max_size
   asg_min_size              = var.asg_min_size
-  availability_zones        = var.availability_zones
+  availability_zones        = ["${module.prod_vps.aws_subnet1_az}"]
   cooldown_period           = var.cooldown_period
 
   public_ip_address         = var.public_ip_address

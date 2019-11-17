@@ -54,7 +54,6 @@ variable "asg_force_delete" {}
 variable "asg_launch_config_name" {}
 variable "asg_max_size" {}
 variable "asg_min_size" {}
-variable "availability_zones" {}
 variable "cooldown_period" {}
 variable "public_ip_address" {}
 

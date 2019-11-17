@@ -194,6 +194,9 @@ module "ec2_codedeploy_group_loadbalancer" {
   aws_iam_service_role_arn          = module.iam_ec2_codedeploy_policy_attachment.CodeDeployServiceRole_arn
   codedeploy_deployment_group_name  = var.codedeploy_deployment_group_name
   target_group_info                 = module.ec2_loadbalancer.lb_name
+  cd_deployment_type          = var.cd_deployment_type
+  deployment_config_service   = var.deployment_config_service
+  autoscaling_groups          = [module.ec2_autoscaling.autoscaling_group_name]
 }
 
 module "lambda_s3_bucket" {

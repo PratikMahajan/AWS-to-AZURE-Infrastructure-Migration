@@ -117,6 +117,15 @@ module "codedeploy_s3_bucket" {
 //  DB_USER               = var.db_username
 //  RECIPE_S3             = var.s3_bucket_name_webapp
 //}
+module "ec2_loadbalancer" {
+  source            = "../../modules/ec2_load_balancer"
+  env               = var.env
+  lb_security_group = ["${module.prod_security_group.aws_lb_security_group}"]
+  lb_subnets        = ["${module.prod_vps.aws_subnet1_id}","${module.prod_vps.aws_subnet2_id}"]
+  loadbalancer_name = var.loadbalancer_name
+  aws_vpc_id        = module.prod_vps.vpc_id
+  certificate_arn   = var.ssl_certificate_arn
+}
 
 
 module "ec2_autoscaling" {
@@ -159,17 +168,6 @@ module "ec2_autoscaling" {
 
   ssl_cert  = var.ssl_cert
   ssl_key   = var.ssl_key
-}
-
-
-module "ec2_loadbalancer" {
-  source            = "../../modules/ec2_load_balancer"
-  env               = var.env
-  lb_security_group = ["${module.prod_security_group.aws_lb_security_group}"]
-  lb_subnets        = ["${module.prod_vps.aws_subnet1_id}","${module.prod_vps.aws_subnet2_id}"]
-  loadbalancer_name = var.loadbalancer_name
-  aws_vpc_id        = module.prod_vps.vpc_id
-  certificate_arn   = var.ssl_certificate_arn
 }
 
 

@@ -200,6 +200,14 @@ module "ec2_codedeploy_group_loadbalancer" {
   autoscaling_groups          = [module.ec2_autoscaling.autoscaling_group_name]
 }
 
+module "route53_a_record_webapp" {
+  source        = "../../modules/route53_dns"
+  domain_name   = var.domain_name
+  domain_prefix = var.webapp_domain_prefix
+  elb_dns_name  = module.ec2_loadbalancer.aws_lb_dns
+  elb_zone_id   = module.ec2_loadbalancer.aws_lb_zone_id
+}
+
 module "lambda_s3_bucket" {
   source         = "../../modules/s3_bucket"
   env            = var.env

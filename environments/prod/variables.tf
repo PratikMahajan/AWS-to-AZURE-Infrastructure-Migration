@@ -88,5 +88,9 @@ variable "deployment_config_service" {}
 variable "loadbalancer_name" {}
 variable "ssl_certificate_arn" {}
 
+# configuring route53
+variable "domain_name" {}
+variable "webapp_domain_prefix" {}
+
 # configuring lambda s3 bucket
 variable "s3_bucket_name_lambda" {}

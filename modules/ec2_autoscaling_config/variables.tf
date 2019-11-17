@@ -19,6 +19,7 @@ variable "aws_account_id" {}
 variable "public_ip_address" {}
 variable "cooldown_period" {}
 
+variable "vpc_subnets" {}
 
 variable "DB_USER" {}
 variable "DB_PASSWORD" {}

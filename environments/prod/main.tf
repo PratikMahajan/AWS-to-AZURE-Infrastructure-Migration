@@ -129,7 +129,7 @@ module "ec2_loadbalanced" {
 
   aws_ec2_security_group    = ["${module.prod_security_group.aws_app_security_group}"]
   iam_instance_profile      = module.iam_ec2_codedeploy_policy_attachment.CodeDeployEC2ServiceRoleInstance
-
+  vpc_subnets               = ["${module.prod_vps.aws_subnet1_id}"]
   ebs_block_name            = var.ebs_block_name
   ebs_delete_on_termination = var.ebs_delete_on_termination
   ebs_volume_size           = var.ebs_volume_size

@@ -54,5 +54,7 @@ resource "aws_autoscaling_group" "asg" {
   force_delete       = var.asg_force_delete
   default_cooldown   = var.cooldown_period
 
+  vpc_zone_identifier    = var.vpc_subnets
+
   launch_configuration   = aws_launch_configuration.asg_launch_config.name
 }

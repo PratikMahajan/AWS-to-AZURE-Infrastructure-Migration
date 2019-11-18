@@ -197,6 +197,41 @@ module "ec2_codedeploy_group_loadbalancer" {
   autoscaling_groups          = [module.ec2_autoscaling.autoscaling_group_name]
 }
 
+module "loadbalancer_policy_scaleUp" {
+  source                  = "../../modules/ec2_autoscaling_policy"
+  adjustment_type         = "ChangeInCapacity"
+  asg_policy_name         = "ScaleUPPolicy_LB"
+  autoscaling_group_name  = module.ec2_autoscaling.autoscaling_group_name
+  cooldown_period         = 60
+  scaling_adjustment      = 1
+
+  alarm_name          = "ScaleUpAlarm"
+  alarm_period        = var.alarm_period
+  alarm_statistic     = var.alarm_statistic
+  alarm_threshold     = var.alarm_threshold_up
+  comparison_operator = var.comparison_operator_up
+  evaluation_periods  = var.evaluation_periods
+  metric_name         = var.metric_name
+}
+
+module "loadbalancer_policy_scaleDown" {
+  source                  = "../../modules/ec2_autoscaling_policy"
+  adjustment_type         = "ChangeInCapacity"
+  asg_policy_name         = "ScaleDOWNPolicy_LB"
+  autoscaling_group_name  = module.ec2_autoscaling.autoscaling_group_name
+  cooldown_period         = 60
+  scaling_adjustment      = -1
+
+  alarm_name          = "ScaleDownAlarm"
+  alarm_period        = var.alarm_period
+  alarm_statistic     = var.alarm_statistic
+  alarm_threshold     = var.alarm_threshold_down
+  comparison_operator = var.comparison_operator_down
+  evaluation_periods  = var.evaluation_periods
+  metric_name         = var.metric_name
+}
+
+
 module "route53_a_record_webapp" {
   source        = "../../modules/route53_dns"
   domain_name   = var.domain_name

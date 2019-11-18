@@ -57,9 +57,6 @@ variable "asg_min_size" {}
 variable "cooldown_period" {}
 variable "public_ip_address" {}
 
-variable "ssl_cert" {}
-variable "ssl_key" {}
-
 # Configuring DynamoDB instance
 variable "dynamo_billing_mode" {}
 variable "dynamo_table_name" {}
@@ -94,3 +91,13 @@ variable "webapp_domain_prefix" {}
 
 # configuring lambda s3 bucket
 variable "s3_bucket_name_lambda" {}
+
+# COnfigure Scaling Policies
+variable "alarm_period" {}
+variable "alarm_statistic" {}
+variable "alarm_threshold_up" {}
+variable "alarm_threshold_down" {}
+variable "comparison_operator_up" {}
+variable "comparison_operator_down" {}
+variable "evaluation_periods" {}
+variable "metric_name" {}

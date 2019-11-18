@@ -7,7 +7,7 @@ resource "aws_autoscaling_policy" "asg_policy" {
 }
 
 
-resource "aws_cloudwatch_metric_alarm" "bat" {
+resource "aws_cloudwatch_metric_alarm" "asg_alarm" {
   alarm_name          = var.alarm_name
   comparison_operator = var.comparison_operator
   evaluation_periods  = var.evaluation_periods
@@ -22,5 +22,5 @@ resource "aws_cloudwatch_metric_alarm" "bat" {
   }
 
   alarm_description = "This metric monitors ec2 cpu utilization"
-  alarm_actions     = aws_autoscaling_policy.asg_policy.arn
+  alarm_actions     = ["${aws_autoscaling_policy.asg_policy.arn}"]
 }

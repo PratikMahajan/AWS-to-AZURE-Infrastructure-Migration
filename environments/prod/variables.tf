@@ -91,6 +91,15 @@ variable "webapp_domain_prefix" {}
 
 # configuring lambda s3 bucket
 variable "s3_bucket_name_lambda" {}
+variable "lambda_function_name" {}
+variable "lamba_handler" {}
+variable "lambda_runtime" {}
+variable "lambda_memory_size" {}
+variable "lambda_reserved_concurrent_executions" {}
+variable "lambda_timeout" {}
+variable "ses_domain_name" {}
+variable "sns_topic_name" {}
+variable "TTLinSec" {}
 
 # COnfigure Scaling Policies
 variable "alarm_period" {}

@@ -33,6 +33,11 @@ resource "aws_iam_role_policy_attachment" "aws_iam_role_could_watch_agent_attach
   policy_arn  = "arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy"
 }
 
+resource "aws_iam_role_policy_attachment" "aws_iam_role_sns_attach" {
+  role        = "${aws_iam_role.CodeDeployEC2ServiceRole.name}"
+  policy_arn  = "arn:aws:iam::aws:policy/AmazonSNSFullAccess"
+}
+
 resource "aws_iam_instance_profile" "CodeDeployEC2ServiceRoleInstance" {
   name  = "CodeDeployEC2ServiceRoleInstance"
   role  = "${aws_iam_role.CodeDeployEC2ServiceRole.name}"

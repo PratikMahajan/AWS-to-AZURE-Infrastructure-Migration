@@ -2,6 +2,10 @@ output "lb_name" {
   value = aws_lb.loadbalancer.name
 }
 
+output "lb_arn" {
+  value = aws_lb.loadbalancer.arn
+}
+
 output "aws_lb_dns" {
   value = aws_lb.loadbalancer.dns_name
 }

@@ -269,14 +269,11 @@ module "lambda" {
 }
 
 module "waf_deploy" {
-  source	= "../../modules/waf_deploy"
-  wafipset_name	= "${var.wafipset_name}"
-  wafipset_value   = "${var.wafipset_value}"
-  wafrule_name     = "${var.wafrule_name}"
-  wafacl_name      = "${var.wafacl_name}"
-  wafvpc_cidr 	= "${var.wafvpc_cidr}"
-  wafsub1_cidr  = "${var.wafsub1_cidr}"
-  wafsub2_cidr  = "${var.wafsub2_cidr}"
-  size_constraint_set_name = "${var.size_constraint_set_name}"
-  
+  source	                = "../../modules/waf_deploy"
+  wafipset_name	            = var.wafipset_name
+  wafipset_value            = var.wafipset_value
+  wafrule_name              = var.wafrule_name
+  wafacl_name               = var.wafacl_name
+  size_constraint_set_name  = var.size_constraint_set_name
+  loadbalancer_arn          = module.ec2_loadbalancer.lb_arn
 }

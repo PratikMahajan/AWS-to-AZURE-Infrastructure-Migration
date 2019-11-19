@@ -38,7 +38,7 @@ resource "aws_wafregional_rule" "wafrule" {
   metric_name = "Rule1"
 
   predicate {
-    data_id = "${aws_wafregional_ipset.wafipset.id}"
+    data_id = aws_wafregional_ipset.wafipset.id
     negated = false
     type    = "IPMatch"
   }
@@ -49,7 +49,7 @@ resource "aws_wafregional_rule" "wafrule2" {
   metric_name   = "Rule2"
 
   predicate {
-    data_id = "${aws_wafregional_size_constraint_set.size_constraint_set.id}"
+    data_id = aws_wafregional_size_constraint_set.size_constraint_set.id
     negated = false
     type    = "SizeConstraint"
   }
@@ -61,7 +61,7 @@ resource "aws_wafregional_rule" "wafrule3" {
   metric_name   = "Rule3"
 
   predicate {
-    data_id = "${aws_wafregional_sql_injection_match_set.sql_injection_match_set.id}"
+    data_id = aws_wafregional_sql_injection_match_set.sql_injection_match_set.id
     negated = false
     type    = "SqlInjectionMatch"
   }
@@ -83,35 +83,13 @@ resource "aws_wafregional_web_acl" "wafacl" {
     }
 
     priority = 1
-    rule_id  = "${aws_wafregional_rule.wafrule.id}"
+    rule_id  = aws_wafregional_rule.wafrule.id
     type     = "REGULAR"
   }
 }
 
-resource "aws_vpc" "wafvpc" {
-  cidr_block = "10.0.0.0/16"
-}
-
-data "aws_availability_zones" "available" {}
-
-resource "aws_subnet" "wafsub1" {
-  vpc_id            = "${aws_vpc.wafvpc.id}"
-  cidr_block        = "10.0.1.0/24"
-  availability_zone = "${data.aws_availability_zones.available.names[0]}"
-}
-
-resource "aws_subnet" "wafsub2" {
-  vpc_id            = "${aws_vpc.wafvpc.id}"
-  cidr_block        = "10.0.2.0/24"
-  availability_zone = "${data.aws_availability_zones.available.names[1]}"
-}
-
-resource "aws_alb" "wafalb" {
-  internal = true
-  subnets  = ["${aws_subnet.wafsub1.id}", "${aws_subnet.wafsub2.id}"]
-}
 
 resource "aws_wafregional_web_acl_association" "webassociation" {
-  resource_arn = "${aws_alb.wafalb.arn}"
-  web_acl_id   = "${aws_wafregional_web_acl.wafacl.id}"
+  resource_arn = var.loadbalancer_arn
+  web_acl_id   = aws_wafregional_web_acl.wafacl.id
 }

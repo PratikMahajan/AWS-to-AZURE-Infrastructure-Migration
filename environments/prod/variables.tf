@@ -106,7 +106,6 @@ variable "alarm_period" {}
 variable "alarm_statistic" {}
 variable "alarm_threshold_up" {}
 variable "alarm_threshold_down" {}
-variable "comparison_operator" {}
 variable "comparison_operator_up" {}
 variable "comparison_operator_down" {}
 variable "evaluation_periods" {}
@@ -117,7 +116,4 @@ variable "wafipset_name" {}
 variable "wafipset_value" {}
 variable "wafacl_name" {}
 variable "wafrule_name" {}
-variable "wafvpc_cidr" {}
-variable "wafsub1_cidr" {}
-variable "wafsub2_cidr" {}
 variable "size_constraint_set_name" {}

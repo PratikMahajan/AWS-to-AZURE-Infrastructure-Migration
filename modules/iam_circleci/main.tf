@@ -183,3 +183,8 @@ resource "aws_iam_user_policy_attachment" "attach_CircleCI-Code-Deploy" {
   user       = var.circleci_user_name
   policy_arn = aws_iam_policy.CircleCI-Code-Deploy.arn
 }
+
+resource "aws_iam_user_policy_attachment" "attach_CircleCI-Lambda" {
+  user       = var.circleci_user_name
+  policy_arn = "arn:aws:iam::aws:policy/AWSLambdaFullAccess"
+}

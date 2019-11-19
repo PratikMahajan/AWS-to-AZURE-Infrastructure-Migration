@@ -246,6 +246,7 @@ module "lambda_s3_bucket" {
   s3_bucket_name = var.s3_bucket_name_lambda
 }
 
+
 module "lambda" {
   source         = "../../modules/lambda"
   sns_topic_name = var.sns_topic_name
@@ -265,4 +266,17 @@ module "lambda" {
   dynamo_table_name = var.dynamo_table_name
   vpc_subnets = ["${module.prod_vps.aws_subnet1_id}","${module.prod_vps.aws_subnet2_id}"]
   aws_lambda_security_group = module.prod_security_group.aws_app_security_group
+}
+
+module "waf_deploy" {
+  source	= "../../modules/waf_deploy"
+  wafipset_name	= "${var.wafipset_name}"
+  wafipset_value   = "${var.wafipset_value}"
+  wafrule_name     = "${var.wafrule_name}"
+  wafacl_name      = "${var.wafacl_name}"
+  wafvpc_cidr 	= "${var.wafvpc_cidr}"
+  wafsub1_cidr  = "${var.wafsub1_cidr}"
+  wafsub2_cidr  = "${var.wafsub2_cidr}"
+  size_constraint_set_name = "${var.size_constraint_set_name}"
+  
 }

@@ -246,3 +246,23 @@ module "lambda_s3_bucket" {
   s3_bucket_name = var.s3_bucket_name_lambda
 }
 
+module "lambda" {
+  source         = "../../modules/lambda"
+  sns_topic_name = var.sns_topic_name
+  s3_bucket_name_lambda = var.s3_bucket_name_lambda
+  lambda_function_name =var.lambda_function_name
+  lamba_handler = var.lamba_handler
+  lambda_runtime = var.lambda_runtime
+  lambda_memory_size = var.lambda_memory_size
+  lambda_reserved_concurrent_executions = var.lambda_reserved_concurrent_executions
+  lambda_timeout = var.lambda_timeout
+  DB_USER = var.db_username
+  DB_PASSWORD = var.db_password
+  DATABASE_NAME = var.db_name
+  DB_HOST = module.prod_rds_instance.RDS_instance_host_address
+  TTL = var.TTLinSec
+  ses_domain_name = var.ses_domain_name
+  dynamo_table_name = var.dynamo_table_name
+  vpc_subnets = ["${module.prod_vps.aws_subnet1_id}","${module.prod_vps.aws_subnet2_id}"]
+  aws_lambda_security_group = module.prod_security_group.aws_app_security_group
+}

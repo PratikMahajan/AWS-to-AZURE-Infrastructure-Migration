@@ -64,6 +64,7 @@ terraform destroy -var-file=<varfile_name>.tfvars
 | --- | --- |
 | Virtual Private Cloud (VPC) | Virtual Network |
 | Organizations | Subscription Management + RBAC + Policy + Management Groups |
+| CloudWatch | Monitor |
 | CloudFront | Content Delivery Network |
 | Route 53 | DNS |
 | Codedeploy | DevOps |
@@ -77,5 +78,5 @@ terraform destroy -var-file=<varfile_name>.tfvars
 | Lambda | Functions |
 | Certificate Manager | App Service Certificates  |
 | Web Application Firewall | Application Gateway - Web Application Firewall + Azure Firewall |
-| SNS | |
+| SNS | Event Grid |
 | SES | |

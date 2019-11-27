@@ -1,71 +1,117 @@
-env = "foo"
+env = "prod"
 
 # Configuration for AWS
-aws_access_key_id       = "foo"
-aws_secret_access_key   = "foo"
+aws_access_key_id       = "AK----------------A7W"
+aws_secret_access_key   = "yt-----------------------------------------bm"
 
 # Variables for VPC creation
-aws_region = "foo"
-subnet1_az = "foo"
-subnet1_cidr = "foo"
-subnet1_name = "foo"
-subnet2_az = "foo"
-subnet2_cidr = "foo"
-subnet2_name = "foo"
-subnet3_az = "foo"
-subnet3_cidr = "foo"
-subnet3_name = "foo"
-vpc_cidr = "foo"
-vpc_name = "foo"
+aws_region = "us-east-1"
+subnet1_az = "us-east-1a"
+subnet1_cidr = "10.0.1.0/24"
+subnet1_name = "pm1"
+subnet2_az = "us-east-1b"
+subnet2_cidr = "10.0.2.0/24"
+subnet2_name = "pm2"
+subnet3_az = "us-east-1c"
+subnet3_cidr = "10.0.3.0/24"
+subnet3_name = "pm3"
+vpc_cidr = "10.0.0.0/16"
+vpc_name = "tfvpc"
 
 # Variables for Database
-s3_bucket_name_webapp = foo
+s3_bucket_name_webapp = "webapp.prod.domain.tld"
 
 # Variables for aws Key pair
-ssh_public_key = "foo"
+ssh_public_key = "ssh-rsa AAAA--232cbe0IMP5X6c2Se+f17Jnr2K9zEmW7jaQ== my@email.tld"
+
 
 # Variables for RDS database instance
-db_identifier           = "foo"
-allocated_storage       = "foo"
-storage_type            = "foo"
-database_engine         = "foo"
-database_engine_version = "foo"
-instance_class          = "foo"
-db_name                 = "foo"
-db_username             = "foo"
-db_password             = "foo"
-publicly_accessible     = "foo"
+db_identifier           = "my-database_identifier"
+allocated_storage       = 20
+storage_type            = "gp2"
+database_engine         = "mariadb"
+database_engine_version = "10.3"
+instance_class          = "db.t2.medium"
+db_name                 = "some_super_cool_db_name"
+db_username             = "some_nice_db_username"
+db_password             = "this_is_a_strong_password"
+publicly_accessible     = "true"
 
 # Variables for EC2 instance
-aws_account_id              = "foo"
-ebs_block_name              = "foo"
-ebs_volume_type             = "foo"
-ebs_volume_size             = "foo"
-ebs_delete_on_termination   = "foo"
-ec2_termination_disable     = "foo"
-ec2_instance_type           = "foo"
-ec2_instance_name           = "foo"
+aws_account_id              = "000000000000000000"
+ebs_block_name              = "/dev/sdf"
+ebs_volume_type             = "gp2"
+ebs_volume_size             = "20"
+ebs_delete_on_termination   = true
+ec2_termination_disable     = false
+ec2_instance_type           = "t2.micro"
+ec2_instance_name           = "RecipeWebApp"
 
+aws_asg_name            = "recipe_autoscaling_group"
+asg_desired_capacity    = 3
+asg_force_delete        = true
+asg_launch_config_name  = "asg_launch_config"
+asg_max_size            = 10
+asg_min_size            = 3
+cooldown_period         = 60
+public_ip_address       = true
 
 # Variables for DynamoDB
-dynamo_billing_mode   = "foo"
-dynamo_table_name     = "foo"
-
+dynamo_billing_mode   = "PROVISIONED"
+dynamo_table_name     = "dynamo_table_is_cool"
 
 # variables for circleci-codedeploy policy
-application_name = "foo"
+application_name = "RecipeWebApp"
+circleci_user_name = "circleci"
 
 # Variables for codedeploy s3
-s3_bucket_name_codedeploy = "foo"
+s3_bucket_name_codedeploy = "codedeploy.prod.domain.tld"
 
 # Variable for EC2 codedeploy instance
-ec2_instance_name_codedeploy  = "foo"
+ec2_instance_name_codedeploy  = "CodeDeploy"
+
+# Varuable for loadbalancer
+loadbalancer_name = "ec2loadbalancer"
+ssl_certificate_arn = "arn:aws:acm:us-east-1:0000000000000:certificate/aaaaaaaa-0000-0000-000a-123abcd456"
+
+#COnfiguring route53
+domain_name = "prod.domain.tld"
+webapp_domain_prefix = "webapp"
 
 # variables for codedeploy app
-cd_app_name             = "foo"
-cd_compute_platform     = "foo"
+cd_app_name             = "my-webapp"
+cd_compute_platform     = "Server"
 
 # Variables for codedeploy group
-cd_deployment_type                  = "foo"
-codedeploy_deployment_group_name    = "foo"
-deployment_config_service           = "foo"
+cd_deployment_type                  = "IN_PLACE"
+codedeploy_deployment_group_name    = "my-webapp-deployment"
+deployment_config_service           = "CodeDeployDefault.AllAtOnce"
+
+# configuring lambda s3
+s3_bucket_name_lambda = "lambda.prod.domain.tld"
+lambda_function_name = "aaaaaaaaaaa"
+lamba_handler = "EmailEvent::handleRequest"
+lambda_runtime = "java8"
+lambda_memory_size = 180
+lambda_reserved_concurrent_executions = -1
+lambda_timeout = 180
+ses_domain_name = "webapp.prod.domain.tld"
+sns_topic_name = "email_request"
+TTLinSec = 1800
+
+# Scaling Policies
+metric_name         = "CPUUtilization"
+alarm_period        = 300
+alarm_statistic     = "Average"
+comparison_operator_up = "GreaterThanThreshold"
+comparison_operator_down = "LessThanThreshold"
+evaluation_periods  = 2
+alarm_threshold_up = 3
+alarm_threshold_down = 1
+
+# variables for waf
+wafipset_name = "tfipset"
+wafipset_value = "192.0.7.0/24"
+wafrule_name = "MyRule"
+wafacl_name = "MyWebACL"
+size_constraint_set_name = "SizeRule"

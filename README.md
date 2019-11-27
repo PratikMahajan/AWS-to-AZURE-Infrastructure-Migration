@@ -25,10 +25,7 @@ According to best practices, the terraform structure is as follows:
 │   └── readme.md
 ├── modules
 │   └── {LIST_OF_ALL_MODULES}
-├── Readme.md
-└── terraform_install
-    ├── install_terraform.sh
-    └── readme.md
+└── Readme.md
 ```
 
 ### Environments
@@ -56,7 +53,7 @@ terraform plan -var-file=<varfile_name>.tfvars -out=<Output_Plan_File_Name.tfsta
 terraform apply "<Output_Plan_File_Name.tfstate>"
 ```
 
-### Destroy VPC
+## Destroy Infrastructure
 ```shell script
 terraform destroy -var-file=<varfile_name>.tfvars
 ```

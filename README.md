@@ -57,3 +57,25 @@ terraform apply "<Output_Plan_File_Name.tfstate>"
 ```shell script
 terraform destroy -var-file=<varfile_name>.tfvars
 ```
+
+# AWS to Azure Migration Services 
+
+| AWS | AZURE |
+| --- | --- |
+| Virtual Private Cloud (VPC) | Virtual Network |
+| Organizations | Subscription Management + RBAC + Policy + Management Groups |
+| CloudFront | Content Delivery Network |
+| Route 53 | DNS |
+| Codedeploy | DevOps |
+| EC2 | Virtual Machines |
+| Application Load Balancer | Application Gateway |
+| Auto Scaling | Virtual Machine Scale Sets |
+| S3 | Blob storage |
+| Server-side encryption with Amazon S3 Key Management Service | Azure Storage Service Encryption |
+| RDS | Database for MySQL | 
+| DynamoDB | Cosmos DB |
+| Lambda | Functions |
+| Certificate Manager | App Service Certificates  |
+| Web Application Firewall | Application Gateway - Web Application Firewall + Azure Firewall |
+| SNS | |
+| SES | |

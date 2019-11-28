@@ -97,3 +97,38 @@ resource "azurerm_subnet_network_security_group_association" "subnet3" {
   subnet_id                 = azurerm_subnet.subnet-3.id
   network_security_group_id = azurerm_network_security_group.network_sg.id
 }
+
+
+# Route Table for Azure Virtual Network and Server Subnet
+resource "azurerm_route_table" "azurt" {
+  name                     = "AzfwRouteTable"
+  resource_group_name      = azurerm_resource_group.resource_group.name
+  location                 = azurerm_resource_group.resource_group.location
+  disable_bgp_route_propagation = false
+
+  route {
+    name           = "AzfwDefaultRoute"
+    address_prefix = "0.0.0.0/0"
+    next_hop_type  = "VirtualAppliance"
+    next_hop_in_ip_address = "10.0.1.4"
+  }
+
+  tags = {
+    environment = var.env
+  }
+}
+
+resource "azurerm_subnet_route_table_association" "subnet-1" {
+  subnet_id      = azurerm_subnet.subnet-1.id
+  route_table_id = azurerm_route_table.azurt.id
+}
+
+resource "azurerm_subnet_route_table_association" "subnet-2" {
+  subnet_id      = azurerm_subnet.subnet-2.id
+  route_table_id = azurerm_route_table.azurt.id
+}
+
+resource "azurerm_subnet_route_table_association" "subnet-3" {
+  subnet_id      = azurerm_subnet.subnet-3.id
+  route_table_id = azurerm_route_table.azurt.id
+}

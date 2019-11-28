@@ -82,3 +82,18 @@ resource "azurerm_network_security_rule" "port443" {
   source_address_prefix       = "*"
   destination_address_prefix  = "*"
 }
+
+resource "azurerm_subnet_network_security_group_association" "subnet1" {
+  subnet_id                 = azurerm_subnet.subnet-1.id
+  network_security_group_id = azurerm_network_security_group.network_sg.id
+}
+
+resource "azurerm_subnet_network_security_group_association" "subnet2" {
+  subnet_id                 = azurerm_subnet.subnet-2.id
+  network_security_group_id = azurerm_network_security_group.network_sg.id
+}
+
+resource "azurerm_subnet_network_security_group_association" "subnet3" {
+  subnet_id                 = azurerm_subnet.subnet-3.id
+  network_security_group_id = azurerm_network_security_group.network_sg.id
+}

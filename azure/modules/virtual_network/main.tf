@@ -132,3 +132,15 @@ resource "azurerm_subnet_route_table_association" "subnet-3" {
   subnet_id      = azurerm_subnet.subnet-3.id
   route_table_id = azurerm_route_table.azurt.id
 }
+
+
+resource "azurerm_public_ip" "public_ip" {
+  name                = "public_ip"
+  location            = azurerm_resource_group.resource_group.location
+  resource_group_name = azurerm_resource_group.resource_group.name
+  allocation_method   = "Dynamic"
+
+  tags = {
+    environment = var.env
+  }
+}

@@ -69,6 +69,29 @@ resource "azurerm_subnet_route_table_association" "subnet-3" {
 }
 
 
+resource "azurerm_application_security_group" "application" {
+  name                = "appsecuritygroup"
+  location            = azurerm_resource_group.resource_group.location
+  resource_group_name = azurerm_resource_group.resource_group.name
+
+  tags = {
+    type = "application"
+    environment = var.env
+  }
+}
+
+resource "azurerm_application_security_group" "database" {
+  name                = "DBsecuritygroup"
+  location            = azurerm_resource_group.resource_group.location
+  resource_group_name = azurerm_resource_group.resource_group.name
+
+  tags = {
+    type = "database"
+    environment = var.env
+  }
+}
+
+
 resource "azurerm_network_security_group" "network_sg" {
   name                = "${var.env}-nsg"
   resource_group_name = azurerm_resource_group.resource_group.name
@@ -104,7 +127,7 @@ resource "azurerm_network_security_rule" "port80" {
 }
 
 resource "azurerm_network_security_rule" "port443" {
-  name                        = "port80"
+  name                        = "port443"
   resource_group_name         = azurerm_resource_group.resource_group.name
   network_security_group_name = azurerm_network_security_group.network_sg.name
   priority                    = 105
@@ -115,6 +138,20 @@ resource "azurerm_network_security_rule" "port443" {
   destination_port_range      = "443"
   source_address_prefix       = "*"
   destination_address_prefix  = "*"
+}
+
+resource "azurerm_network_security_rule" "port3306" {
+  name                        = "port3306"
+  resource_group_name         = azurerm_resource_group.resource_group.name
+  network_security_group_name = azurerm_network_security_group.network_sg.name
+  priority                    = 110
+  direction                   = "Inbound"
+  access                      = "Allow"
+  protocol                    = "Tcp"
+  source_port_range           = "3306"
+  destination_port_range      = "3306"
+  source_application_security_group_ids       = ["${azurerm_application_security_group.application.id}"]
+  destination_application_security_group_ids  = ["${azurerm_application_security_group.database.id}"]
 }
 
 resource "azurerm_subnet_network_security_group_association" "subnet1" {
@@ -140,28 +177,6 @@ resource "azurerm_public_ip" "public_ip" {
   allocation_method   = "Dynamic"
 
   tags = {
-    environment = var.env
-  }
-}
-
-resource "azurerm_application_security_group" "application" {
-  name                = "appsecuritygroup"
-  location            = azurerm_resource_group.resource_group.location
-  resource_group_name = azurerm_resource_group.resource_group.name
-
-  tags = {
-    type = "application"
-    environment = var.env
-  }
-}
-
-resource "azurerm_application_security_group" "database" {
-  name                = "DBsecuritygroup"
-  location            = azurerm_resource_group.resource_group.location
-  resource_group_name = azurerm_resource_group.resource_group.name
-
-  tags = {
-    type = "database"
     environment = var.env
   }
 }

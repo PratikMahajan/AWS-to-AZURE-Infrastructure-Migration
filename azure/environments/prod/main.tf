@@ -25,3 +25,4 @@ module "storage_blob_webapp" {
   storage_account_name    = module.storage_account.storage_account_name
   storage_container_name  = "webapp"
 }
+

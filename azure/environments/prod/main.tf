@@ -26,7 +26,7 @@ module "storage_blob_webapp" {
   storage_container_name  = "webapp"
 }
 
-module "rds_database" {
+module "sql_database" {
   source                  = "../../modules/sql_database"
   env                     = var.env
   sql_server_name         = var.sql_server_name 
@@ -39,3 +39,10 @@ module "rds_database" {
   db_subnet               = module.virtual_network.db_subnet
 }
 
+module "event_grid" {
+  source                  = "../../modules/event_grid"
+  env                     = var.env
+  resource_group_location = module.virtual_network.resource_group_location
+  resource_group_name     = module.virtual_network.resource_group_name
+  topic                   = var.topic
+}

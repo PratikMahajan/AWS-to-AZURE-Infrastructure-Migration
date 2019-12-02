@@ -1,8 +1,15 @@
 env = "prod"
 
 # Variables for Virtual Network
-location      = "West US"
+location      = "West US 2"
 vnet_addr     = ["10.0.0.0/16"]
 subnet1_addr  = "10.0.1.0/24"
 subnet2_addr  = "10.0.2.0/24"
 subnet3_addr  = "10.0.3.0/24"
+
+# Variables for rds
+sql_server_name    = "foo"
+sql_server_version = "12.0"
+admin_login        = "bar"
+admin_pass         = "foo"
+sql_db_name        = "bar"

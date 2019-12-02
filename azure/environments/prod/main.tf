@@ -53,3 +53,12 @@ module "storage_blob_function" {
   storage_account_name    = module.storage_account.storage_account_name
   storage_container_name  = var.function_bolb_name
 }
+
+module "cosmos_db" {
+  source                  = "../../modules/cosmos_db"
+  cosmos_acct_name        = var.cosmos_acct_name
+  cosmos_tbl_name         = var.cosmos_tbl_name
+  failover_loc            = var.failover_loc
+  resource_group_location = module.virtual_network.resource_group_location
+  resource_group_name     = module.virtual_network.resource_group_name
+}

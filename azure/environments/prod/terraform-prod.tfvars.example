@@ -16,3 +16,6 @@ sql_db_name        = "bar"
 
 # Variables for event_grid
 topic              = "foo"
+
+# Variables for function
+function_bolb_name = "functioncsye6225"

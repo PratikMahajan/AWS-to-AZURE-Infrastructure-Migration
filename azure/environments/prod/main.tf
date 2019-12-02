@@ -26,6 +26,18 @@ module "storage_blob_webapp" {
   storage_container_name  = "webapp"
 }
 
+module "mariadb" {
+  source                        = "../../modules/mariadb_database"
+  maria_db_server_capacity      = var.maria_db_server_scale_capacity
+  maria_db_storage_mb           = var.maria_db_storage_mb
+  mariadb_admin_login_password  = var.mariadb_admin_login_password
+  mariadb_admin_login_username  = var.mariadb_admin_login_username
+  mariadb_name                  = var.mariadb_name
+  mariadb_ssl_enforcement       = var.mariadb_ssl_enforcement
+  resource_group_location       = module.virtual_network.resource_group_location
+  resource_group_name           = module.virtual_network.resource_group_name
+}
+
 module "event_grid" {
   source                  = "../../modules/event_grid"
   env                     = var.env

@@ -21,3 +21,4 @@ variable "cosmos_tbl_name" {}
 variable "failover_loc" {}
 
 variable "function_bolb_name" {}
+variable "function_name" {}

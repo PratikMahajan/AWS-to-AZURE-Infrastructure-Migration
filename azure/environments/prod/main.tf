@@ -27,7 +27,7 @@ module "storage_blob_webapp" {
 }
 
 module "rds_database" {
-  source                  = "../../modules/rds_database"
+  source                  = "../../modules/sql_database"
   env                     = var.env
   sql_server_name         = var.sql_server_name 
   sql_server_version      = var.sql_server_version

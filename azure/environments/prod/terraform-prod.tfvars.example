@@ -7,13 +7,24 @@ subnet1_addr  = "10.0.1.0/24"
 subnet2_addr  = "10.0.2.0/24"
 subnet3_addr  = "10.0.3.0/24"
 
+storage_account_name = "vadapw"
+
+# Mariadb server
+maria_db_server_scale_capacity  = 2
+maria_db_storage_mb             = 5120
+mariadb_name                    = "somenameformaria"
+mariadb_ssl_enforcement         = "Disabled"
+mariadb_admin_login_username    = "someusername"
+mariadb_admin_login_password    = "12345@ABCDxyz"
+
 # Variables for event_grid
 topic              = "foo"
 
 # Variables for CosmosDB
 cosmos_acct_name   = "foo"
 cosmos_tbl_name    = "bar"
-failover_loc       = "foo"
+failover_loc       = "West US"
 
 # Variables for function
 function_bolb_name = "bar"
+function_name      = "foo"

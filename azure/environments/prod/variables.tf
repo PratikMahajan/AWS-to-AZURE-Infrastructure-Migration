@@ -14,3 +14,5 @@ variable "admin_pass" {}
 variable "sql_db_name" {}
 
 variable "topic" {}
+
+variable "function_bolb_name" {}

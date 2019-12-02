@@ -44,3 +44,11 @@ module "dns_a_record" {
   resource_group_name = module.virtual_network.resource_group_name
 }
 
+module "virtual_machine" {
+  source	                   = "../../modules/virtual_machine"
+  custom_image_name                = var.custom_image_name
+  custom_image_resource_group_name = var.custom_image_resource_group_name
+  resource_group_name              = module.virtual_network.resource_group_name
+  location          = module.virtual_network.resource_group_location
+}
+

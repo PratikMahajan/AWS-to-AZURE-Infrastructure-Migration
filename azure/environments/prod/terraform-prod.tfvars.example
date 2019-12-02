@@ -10,5 +10,10 @@ subnet3_addr  = "10.0.3.0/24"
 # Variables for event_grid
 topic              = "foo"
 
+# Variables for CosmosDB
+cosmos_acct_name   = "foo"
+cosmos_tbl_name    = "bar"
+failover_loc       = "foo"
+
 # Variables for function
-function_bolb_name = "functioncsye6225"
+function_bolb_name = "bar"

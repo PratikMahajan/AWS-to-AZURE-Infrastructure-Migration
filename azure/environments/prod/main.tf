@@ -52,5 +52,5 @@ module "storage_blob_function" {
   source                  = "../../modules/blob_storage"
   storage_account_id      = module.storage_account.storage_account_id
   storage_account_name    = module.storage_account.storage_account_name
-  storage_container_name  = "myfunction"
+  storage_container_name  = var.function_bolb_name
 }

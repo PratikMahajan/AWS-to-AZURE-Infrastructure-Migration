@@ -1,9 +1,0 @@
-variable "env" {}
-variable "sql_server_name" {}   
-variable "sql_server_version" {}
-variable "admin_login" {}       
-variable "admin_pass" {}        
-variable "sql_db_name" {}       
-variable "resource_group_name" {}
-variable "resource_group_location" {}
-variable "db_subnet" {}

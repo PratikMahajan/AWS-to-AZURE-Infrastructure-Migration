@@ -62,3 +62,11 @@ module "cosmos_db" {
   resource_group_location = module.virtual_network.resource_group_location
   resource_group_name     = module.virtual_network.resource_group_name
 }
+
+module "function" {
+  source                    = "../../modules/function"
+  function_name             = var.function_name
+  resource_group_location   = module.virtual_network.resource_group_location
+  resource_group_name       = module.virtual_network.resource_group_name
+  storage_connection_string = module.storage_account.storage_account_connection_string 
+}

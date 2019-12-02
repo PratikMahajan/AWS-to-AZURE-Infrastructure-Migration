@@ -13,3 +13,6 @@ variable "mariadb_admin_login_password" {}
 variable "mariadb_admin_login_username" {}
 variable "mariadb_name" {}
 variable "mariadb_ssl_enforcement" {}
+
+variable "domain_name" {}
+variable "resource_group_name" {}

@@ -37,3 +37,10 @@ module "mariadb" {
   resource_group_location       = module.virtual_network.resource_group_location
   resource_group_name           = module.virtual_network.resource_group_name
 }
+
+module "dns_a_record" {
+  source	      = "../../modules/az_dns"
+  domain_name         = var.domain_name
+  resource_group_name = module.virtual_network.resource_group_name
+}
+

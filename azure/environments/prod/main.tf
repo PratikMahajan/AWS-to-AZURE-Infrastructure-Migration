@@ -26,19 +26,6 @@ module "storage_blob_webapp" {
   storage_container_name  = "webapp"
 }
 
-module "sql_database" {
-  source                  = "../../modules/sql_database"
-  env                     = var.env
-  sql_server_name         = var.sql_server_name 
-  sql_server_version      = var.sql_server_version
-  admin_login             = var.admin_login
-  admin_pass              = var.admin_pass
-  sql_db_name             = var.sql_db_name
-  resource_group_location = module.virtual_network.resource_group_location
-  resource_group_name     = module.virtual_network.resource_group_name
-  db_subnet               = module.virtual_network.db_subnet
-}
-
 module "event_grid" {
   source                  = "../../modules/event_grid"
   env                     = var.env

@@ -46,9 +46,11 @@ module "dns_a_record" {
 
 module "virtual_machine" {
   source	                   = "../../modules/virtual_machine"
-  custom_image_name                = var.custom_image_name
-  custom_image_resource_group_name = var.custom_image_resource_group_name
+  centos_image_name                = var.centos_image_name
+  network_security_group_id        = module.virtual_network.network_security_group_id
+  subnet_id                        = module.virtual_network.subnet_id
+  public_ip_address_id             = module.virtual_network.public_ip_address_id
   resource_group_name              = module.virtual_network.resource_group_name
-  location          = module.virtual_network.resource_group_location
+  resource_group_location          = module.virtual_network.resource_group_location
 }
 

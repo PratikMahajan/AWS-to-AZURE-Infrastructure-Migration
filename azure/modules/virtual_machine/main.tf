@@ -1,92 +1,98 @@
-data "azurerm_image" "custom" {
-  name                = "${var.custom_image_name}"
-  resource_group_name = "${var.custom_image_resource_group_name}"
+data "azurerm_image" "centos" {
+  name                = "${var.centos_image_name}"
+  resource_group_name = var.resource_group_name
 }
 
-resource "azurerm_resource_group" "resource_group" {
-    name     = var.resource_group_name
-    location = var.location
+resource "azurerm_lb" "vm_lb" {
+  name                = "az_loadbal"
+  location            = var.resource_group_location
+  resource_group_name = var.resource_group_name
+
+  frontend_ip_configuration {
+    name                 = "PubIPAddr"
+    public_ip_address_id = "${var.public_ip_address_id}"
+  }
 }
 
-resource "azurerm_virtual_network" "virtual_network" {
-    name                = "VNet"
-    address_space       = ["10.0.0.0/16"]
-    location            = azurerm_resource_group.resource_group.location
-    resource_group_name = azurerm_resource_group.resource_group.name
+resource "azurerm_lb_backend_address_pool" "be_addr_pool" {
+  resource_group_name = var.resource_group_name
+  loadbalancer_id     = "${azurerm_lb.vm_lb.id}"
+  name                = "BackendAddrpool"
 }
 
-resource "azurerm_subnet" "vm_subnet" {
-  name                 = "VMsubnet"
-  virtual_network_name = azurerm_virtual_network.virtual_network.name
-  resource_group_name  = azurerm_resource_group.resource_group.name
-  address_prefix       = "10.0.1.0/24"
+resource "azurerm_lb_probe" "lb_probe" {
+  resource_group_name = var.resource_group_name
+  loadbalancer_id     = "${azurerm_lb.vm_lb.id}"
+  name                = "http_probe"
+  protocol            = "Http"
+  request_path        = "/health"
+  port                = 8080
 }
 
-resource "azurerm_public_ip" "public_ip" {
-    name                         = "PublicIP"
-    location                     = azurerm_resource_group.resource_group.location
-    resource_group_name          = azurerm_resource_group.resource_group.name
-    allocation_method            = "Dynamic"
+resource "azurerm_lb_nat_pool" "lb_nat_pool" {
+  resource_group_name            = var.resource_group_name
+  loadbalancer_id                = "${azurerm_lb.vm_lb.id}"
+  name                           = "app_pool"
+  protocol                       = "Tcp"
+  frontend_port_start            = 80
+  frontend_port_end              = 81
+  backend_port                   = 8080
+  frontend_ip_configuration_name = "PubIPAddr"
 }
 
-resource "azurerm_network_security_group" "nsg" {
-    name                = "NetworkSecurityGroup"
-    location            = azurerm_resource_group.resource_group.location
-    resource_group_name = azurerm_resource_group.resource_group.name
-
-    security_rule {
-        name                       = "SSH"
-        priority                   = 1001
-        direction                  = "Inbound"
-        access                     = "Allow"
-        protocol                   = "Tcp"
-        source_port_range          = "*"
-        destination_port_range     = "22"
-        source_address_prefix      = "*"
-        destination_address_prefix = "*"
-    }
-}
-
-resource "azurerm_network_interface" "nic" {
-    name                        = "NIC"
-    location                    = azurerm_resource_group.resource_group.location
-    resource_group_name         = azurerm_resource_group.resource_group.name
-    network_security_group_id   = azurerm_network_security_group.nsg.id
-
-    ip_configuration {
-        name                          = "NicConfiguration"
-        subnet_id                     = "${azurerm_subnet.vm_subnet.id}"
-        private_ip_address_allocation = "Dynamic"
-        public_ip_address_id          = "${azurerm_public_ip.public_ip.id}"
-    }
-}
-
-resource "azurerm_virtual_machine" "main" {
-  name                  = "VM123"
-  location              = "${azurerm_resource_group.resource_group.location}"
-  resource_group_name   = "${azurerm_resource_group.resource_group.name}"
-  network_interface_ids = ["${azurerm_network_interface.nic.id}"]
-  vm_size               = "Standard_DS1_v2"
-  delete_os_disk_on_termination = true
-  delete_data_disks_on_termination = true
+resource "azurerm_virtual_machine_scale_set" "vm_scale" {
+  name                  = "VM_CSYE6225"
+  location              = var.resource_group_location
+  resource_group_name   = var.resource_group_name
   
-  storage_image_reference {
-    id = "${data.azurerm_image.custom.id}"
+  automatic_os_upgrade = true
+  upgrade_policy_mode  = "Rolling"
+
+  rolling_upgrade_policy {
+    max_batch_instance_percent              = 20
+    max_unhealthy_instance_percent          = 20
+    max_unhealthy_upgraded_instance_percent = 5
+    pause_time_between_batches              = "PT0S"
   }
 
-  storage_os_disk {
-    name              = "myosdisk1"
+  health_probe_id = "${azurerm_lb_probe.lb_probe.id}"
+
+  sku {
+    name     = "Standard_F2"
+    tier     = "Standard"
+    capacity = 2
+  }
+  
+  storage_profile_image_reference {
+    id = data.azurerm_image.centos.id
+  }
+
+  storage_profile_os_disk {
+    name              = ""
     caching           = "ReadWrite"
     create_option     = "FromImage"
     managed_disk_type = "Standard_LRS"
   }
   os_profile {
-    computer_name  = "hostname"
+    computer_name_prefix  = "hostname"
     admin_username = "testadmin"
-    admin_password = "Password1234!"
+    admin_password = "Password12345"
   }
   os_profile_linux_config {
     disable_password_authentication = false
+  }
+  
+  network_profile {
+    name    = "nwprofile"
+    primary = true
+
+    ip_configuration {
+      name                                   = "IPConfig"
+      primary                                = true
+      subnet_id                              = "${var.subnet_id}"
+      load_balancer_backend_address_pool_ids = ["${azurerm_lb_backend_address_pool.be_addr_pool.id}"]
+      load_balancer_inbound_nat_rules_ids    = ["${azurerm_lb_nat_pool.lb_nat_pool.id}"]
+    }
   }
 
 }

@@ -1,4 +1,6 @@
-variable "custom_image_name" {}
-variable "custom_image_resource_group_name" {}
+variable "centos_image_name" {}
+variable "network_security_group_id" {}
+variable "subnet_id" {}
+variable "public_ip_address_id" {}
 variable "resource_group_name" {}
-variable "location" {}
+variable "resource_group_location" {}

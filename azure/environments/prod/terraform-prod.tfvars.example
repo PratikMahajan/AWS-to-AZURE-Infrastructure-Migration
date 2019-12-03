@@ -28,3 +28,11 @@ failover_loc       = "West US"
 # Variables for function
 function_bolb_name = "functioncsye6225"
 function_name      = "csye6335func"
+
+# Variables for Loadbalancer_pm
+dns_name        = "azvadapw"
+hostname        = "somehostname"
+lb_ip_dns_name  = "azvadapw"
+rg_prefix       = "azvadapw"
+ssh_key         = "ssh-rsa A{}xS+yhg7e{}JHR0Q6{}QtSY{}1FiKeL0v{}PW3y{}XkPseI{}CqfiASiUPSaMYU7QKA/6RqQ{}ada""
+vm_size         = "Standard_B1s"

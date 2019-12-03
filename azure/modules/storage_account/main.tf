@@ -5,5 +5,5 @@ resource "azurerm_storage_account" "storage_account" {
   account_tier             = "Standard"
   account_replication_type = "LRS"
   enable_blob_encryption   = "true"
-  account_kind             = "BlobStorage"
+  account_kind             = "StorageV2"
 }

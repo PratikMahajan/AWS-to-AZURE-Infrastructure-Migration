@@ -37,3 +37,36 @@ module "mariadb" {
   resource_group_location       = module.virtual_network.resource_group_location
   resource_group_name           = module.virtual_network.resource_group_name
 }
+
+module "event_grid" {
+  source                  = "../../modules/event_grid"
+  env                     = var.env
+  resource_group_location = module.virtual_network.resource_group_location
+  resource_group_name     = module.virtual_network.resource_group_name
+  topic                   = var.topic
+}
+
+
+module "storage_blob_function" {
+  source                  = "../../modules/blob_storage"
+  storage_account_id      = module.storage_account.storage_account_id
+  storage_account_name    = module.storage_account.storage_account_name
+  storage_container_name  = var.function_bolb_name
+}
+
+module "cosmos_db" {
+  source                  = "../../modules/cosmos_db"
+  cosmos_acct_name        = var.cosmos_acct_name
+  cosmos_tbl_name         = var.cosmos_tbl_name
+  failover_loc            = var.failover_loc
+  resource_group_location = module.virtual_network.resource_group_location
+  resource_group_name     = module.virtual_network.resource_group_name
+}
+
+module "function" {
+  source                    = "../../modules/function"
+  function_name             = var.function_name
+  resource_group_location   = module.virtual_network.resource_group_location
+  resource_group_name       = module.virtual_network.resource_group_name
+  storage_connection_string = module.storage_account.storage_account_connection_string 
+}

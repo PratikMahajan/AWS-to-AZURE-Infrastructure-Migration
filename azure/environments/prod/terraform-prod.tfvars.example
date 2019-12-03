@@ -16,3 +16,15 @@ mariadb_name                    = "somenameformaria"
 mariadb_ssl_enforcement         = "Disabled"
 mariadb_admin_login_username    = "someusername"
 mariadb_admin_login_password    = "12345@ABCDxyz"
+
+# Variables for event_grid
+topic              = "foo"
+
+# Variables for CosmosDB
+cosmos_acct_name   = "foo"
+cosmos_tbl_name    = "bar"
+failover_loc       = "West US"
+
+# Variables for function
+function_bolb_name = "bar"
+function_name      = "foo"

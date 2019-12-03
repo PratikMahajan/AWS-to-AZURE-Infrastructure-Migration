@@ -70,3 +70,19 @@ module "function" {
   resource_group_name       = module.virtual_network.resource_group_name
   storage_connection_string = module.storage_account.storage_account_connection_string 
 }
+
+
+module "loadbalancer" {
+  source              = "../../modules/loadbalancer"
+  admin_username      = "centos"
+  dns_name            = var.dns_name
+  env                 = var.env
+  hostname            = var.hostname
+  lb_ip_dns_name      = var.lb_ip_dns_name
+  location            = module.virtual_network.resource_group_location
+  resource_group_name = module.virtual_network.resource_group_name
+  rg_prefix           = var.rg_prefix
+  ssh_key_data        = var.ssh_key
+  subnet_id           = module.virtual_network.subnet_id_1
+  vm_size             = var.vm_size
+}

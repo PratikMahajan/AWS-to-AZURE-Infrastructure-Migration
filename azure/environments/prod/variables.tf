@@ -22,3 +22,11 @@ variable "failover_loc" {}
 
 variable "function_bolb_name" {}
 variable "function_name" {}
+
+
+variable "dns_name" {}
+variable "hostname" {}
+variable "lb_ip_dns_name" {}
+variable "rg_prefix" {}
+variable "ssh_key" {}
+variable "vm_size" {}

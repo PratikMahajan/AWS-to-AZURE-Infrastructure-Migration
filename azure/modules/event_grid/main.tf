@@ -1,4 +1,4 @@
-resource "azurerm_eventgrid_topic" "example" {
+resource "azurerm_eventgrid_topic" "topic" {
   name                = var.topic
   location            = var.resource_group_location 
   resource_group_name = var.resource_group_name

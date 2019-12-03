@@ -22,7 +22,7 @@ resource "azurerm_lb" "lb" {
 
   frontend_ip_configuration {
     name                 = "LoadBalancerFrontEnd"
-    public_ip_address_id = "${azurerm_public_ip.lbpip.id}"
+    public_ip_address_id = azurerm_public_ip.lbpip.id
   }
 }
 
@@ -61,8 +61,8 @@ resource "azurerm_lb_rule" "lb_rule" {
 resource "azurerm_lb_probe" "lb_probe" {
   resource_group_name = var.resource_group_name
   loadbalancer_id     = azurerm_lb.lb.id
-  name                = "tcpProbe"
-  protocol            = "tcp"
+  name                = "httpProbe"
+  protocol            = "http"
   port                = 80
   request_path        = "/health"
   interval_in_seconds = 5
@@ -84,23 +84,22 @@ resource "azurerm_network_interface" "nic" {
 }
 
 resource "azurerm_network_interface_backend_address_pool_association" "backend_address_pool" {
+  count               = 2
   backend_address_pool_id = azurerm_lb_backend_address_pool.backend_pool.id
   ip_configuration_name = "ipconfig${count.index}"
-  network_interface_id = azurerm_network_interface.nic.id
+  network_interface_id = azurerm_network_interface.nic[count.index].id
 }
 
 resource "azurerm_network_interface_nat_rule_association" "network_interface_nat_rule" {
-  backend_address_pool_id = azurerm_lb_backend_address_pool.backend_pool.id
+  count               = 2
   ip_configuration_name = "ipconfig${count.index}"
-  network_interface_id = azurerm_network_interface.nic.id
+  network_interface_id = azurerm_network_interface.nic[count.index].id
   nat_rule_id = element(azurerm_lb_nat_rule.tcp.*.id, count.index)
 }
 
 data "azurerm_image" "search" {
   resource_group_name = var.resource_group_name
-  tags{
-    os = "centos"
-  }
+  name = "centos_image"
 }
 
 resource "azurerm_virtual_machine" "vm" {

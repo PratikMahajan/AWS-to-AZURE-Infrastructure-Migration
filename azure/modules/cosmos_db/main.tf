@@ -27,7 +27,7 @@ resource "azurerm_cosmosdb_account" "db" {
   }
 }
 
-resource "azurerm_cosmosdb_table" "example" {
+resource "azurerm_cosmosdb_table" "table" {
   name                = var.cosmos_tbl_name
   resource_group_name = var.resource_group_name 
   account_name        = "${azurerm_cosmosdb_account.db.name}"

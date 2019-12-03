@@ -1,4 +1,4 @@
-resource "azurerm_app_service_plan" "example" {
+resource "azurerm_app_service_plan" "app_service_plan" {
   name                = "csye6225-service-plan"
   location            = var.resource_group_location 
   resource_group_name = var.resource_group_name 
@@ -10,21 +10,21 @@ resource "azurerm_app_service_plan" "example" {
   }
 }
 
-resource "azurerm_application_insights" "test" {
+resource "azurerm_application_insights" "app_insights" {
   name                = "csye6225-terraform-insights"
   location            = var.resource_group_location
   resource_group_name = var.resource_group_name
   application_type    = "Web"
 }
 
-resource "azurerm_function_app" "example" {
+resource "azurerm_function_app" "func_app" {
   name                      = var.function_name 
   location                  = var.resource_group_location 
   resource_group_name       = var.resource_group_name 
-  app_service_plan_id       = "${azurerm_app_service_plan.example.id}"
+  app_service_plan_id       = "${azurerm_app_service_plan.app_service_plan.id}"
   storage_connection_string = var.storage_connection_string
   
   app_settings = {
-    "APPINSIGHTS_INSTRUMENTATIONKEY" = "${azurerm_application_insights.test.instrumentation_key}"
+    "APPINSIGHTS_INSTRUMENTATIONKEY" = "${azurerm_application_insights.app_insights.instrumentation_key}"
   }
 }

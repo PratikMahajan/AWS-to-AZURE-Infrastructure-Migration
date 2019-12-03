@@ -1,5 +1,5 @@
 resource "azurerm_app_service_plan" "example" {
-  name                = "azure-functions-test-service-plan"
+  name                = "csye6225-service-plan"
   location            = var.resource_group_location 
   resource_group_name = var.resource_group_name 
   kind                = "FunctionApp"
@@ -11,7 +11,7 @@ resource "azurerm_app_service_plan" "example" {
 }
 
 resource "azurerm_application_insights" "test" {
-  name                = "test-terraform-insights"
+  name                = "csye6225-terraform-insights"
   location            = var.resource_group_location
   resource_group_name = var.resource_group_name
   application_type    = "Web"

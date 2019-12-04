@@ -1,9 +1,12 @@
 variable "env" {}
+variable "domain_name" {}
+
 variable "location" {}
 variable "vnet_addr" {}
 variable "subnet1_addr" {}
 variable "subnet2_addr" {}
 variable "subnet3_addr" {}
+variable "lb_ip_dns_name" {}
 
 variable "storage_account_name" {}
 
@@ -26,3 +29,12 @@ variable "failover_loc" {}
 
 variable "function_bolb_name" {}
 variable "function_name" {}
+
+
+variable "hostname" {}
+variable "ssh_key" {}
+variable "image_name" {}
+variable "vm_increase_threshold" {}
+variable "vm_decrease_threshold" {}
+
+variable "domain_name_tld" {}

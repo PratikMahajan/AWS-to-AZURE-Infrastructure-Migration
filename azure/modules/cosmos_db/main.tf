@@ -1,10 +1,11 @@
 resource "azurerm_cosmosdb_account" "db" {
-  name                = var.cosmos_acct_name
+  name                = "${var.env}-${var.cosmos_acct_name}-${var.domain}"
   location            = var.resource_group_location
   resource_group_name = var.resource_group_name
   offer_type          = "Standard"
   kind                = "GlobalDocumentDB"
   enable_automatic_failover = true
+
   capabilities {
     name              = "EnableTable"
   }
@@ -14,11 +15,6 @@ resource "azurerm_cosmosdb_account" "db" {
     max_interval_in_seconds = 10
     max_staleness_prefix    = 200
   }
-
-  //geo_location {
-  //  location          = var.failover_loc
-  //  failover_priority = 1
-  //}
 
   geo_location {
     prefix            = "${var.cosmos_acct_name}-customid"

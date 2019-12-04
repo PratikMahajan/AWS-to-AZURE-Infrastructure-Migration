@@ -1,4 +1,5 @@
 env = "prod"
+domain_name = "domaintld"
 
 # Variables for Virtual Network
 location      = "West US 2"
@@ -6,6 +7,7 @@ vnet_addr     = ["10.0.0.0/16"]
 subnet1_addr  = "10.0.1.0/24"
 subnet2_addr  = "10.0.2.0/24"
 subnet3_addr  = "10.0.3.0/24"
+lb_ip_dns_name  = "azvadapw"
 
 storage_account_name = "domaintld"
 
@@ -15,13 +17,13 @@ maria_db_storage_mb             = 5120
 mariadb_name                    = "somenameformaria"
 mariadb_ssl_enforcement         = "Disabled"
 mariadb_admin_login_username    = "someusername"
-mariadb_admin_login_password    = "12345@ABCDxyz"
+mariadb_admin_login_password    = "1234@ABCxyz"
 
 # Variables for event_grid
 topic              = "emailrequest"
 
 # Variables for CosmosDB
-cosmos_acct_name   = "csye6225"
+cosmos_acct_name   = "csye6225x"
 cosmos_tbl_name    = "csye6225"
 failover_loc       = "West US"
 
@@ -30,9 +32,10 @@ function_bolb_name = "functioncsye6225"
 function_name      = "csye6335func"
 
 # Variables for Loadbalancer_pm
-dns_name        = "azvadapw"
 hostname        = "somehostname"
-lb_ip_dns_name  = "azvadapw"
-rg_prefix       = "azvadapw"
-ssh_key         = "ssh-rsa A{}xS+yhg7e{}JHR0Q6{}QtSY{}1FiKeL0v{}PW3y{}XkPseI{}CqfiASiUPSaMYU7QKA/6RqQ{}ada""
-vm_size         = "Standard_B1s"
+image_name      = "centos_image"
+vm_increase_threshold = 75
+vm_decrease_threshold = 5
+ssh_key         = "ssh-rsa AAAAB{}bw09////EiDdi{}qwIUMeSegsKSSkGPl{}rNDpCdcJm8nYz+K0JIXf{}oaDK1ZV4Xyry0e{}"
+
+domain_name_tld = "az.domain.tld"

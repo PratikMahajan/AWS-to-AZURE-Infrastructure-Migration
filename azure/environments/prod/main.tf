@@ -96,10 +96,10 @@ module "loadbalancer" {
   subnet_id_appgateway = module.virtual_network.subnet_id_3
 }
 
-//module "dns" {
-//  source = "../../modules/dns"
-//  dns_record_name = "a_record"
-//  domain_name_tld     = var.domain_name_tld
-//  records_array   = ["${module.virtual_network.public_ip_address}"]
-//  resource_group_name = module.virtual_network.resource_group_name
-//}
+module "dns" {
+  source = "../../modules/dns"
+  dns_record_name = "a_record"
+  domain_name_tld     = var.domain_name_tld
+  records_array   = ["${module.loadbalancer.app_gateway_ip}"]
+  resource_group_name = module.virtual_network.resource_group_name
+}

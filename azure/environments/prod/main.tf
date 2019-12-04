@@ -92,12 +92,14 @@ module "loadbalancer" {
   resource_group_location = module.virtual_network.resource_group_location
   vm_decrease_threshold = var.vm_decrease_threshold
   vm_increase_threshold = var.vm_increase_threshold
+  az_virtual_network_name = module.virtual_network.virtual_network_name
+  subnet_id_appgateway = module.virtual_network.subnet_id_3
 }
 
-module "dns" {
-  source = "../../modules/dns"
-  dns_record_name = "a_record"
-  domain_name_tld     = var.domain_name_tld
-  records_array   = ["${module.virtual_network.public_ip_address}"]
-  resource_group_name = module.virtual_network.resource_group_name
-}
+//module "dns" {
+//  source = "../../modules/dns"
+//  dns_record_name = "a_record"
+//  domain_name_tld     = var.domain_name_tld
+//  records_array   = ["${module.virtual_network.public_ip_address}"]
+//  resource_group_name = module.virtual_network.resource_group_name
+//}

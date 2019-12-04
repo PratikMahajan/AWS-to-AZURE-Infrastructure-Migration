@@ -1,19 +1,19 @@
-resource "azurerm_lb" "lb" {
-  resource_group_name = var.resource_group_name
-  name                = "${var.env}lb"
-  location            = var.location
-
-  frontend_ip_configuration {
-    name                 = "LoadBalancerFrontEnd"
-    public_ip_address_id = var.azure_public_ip
-  }
-}
-
-resource "azurerm_lb_backend_address_pool" "backend_pool" {
-  resource_group_name = var.resource_group_name
-  loadbalancer_id     = azurerm_lb.lb.id
-  name                = "${var.env}-BackendPool"
-}
+//resource "azurerm_lb" "lb" {
+//  resource_group_name = var.resource_group_name
+//  name                = "${var.env}lb"
+//  location            = var.location
+//
+//  frontend_ip_configuration {
+//    name                 = "LoadBalancerFrontEnd"
+//    public_ip_address_id = var.azure_public_ip
+//  }
+//}
+//
+//resource "azurerm_lb_backend_address_pool" "backend_pool" {
+//  resource_group_name = var.resource_group_name
+//  loadbalancer_id     = azurerm_lb.lb.id
+//  name                = "${var.env}-BackendPool"
+//}
 
 //resource "azurerm_lb_probe" "lb_probe" {
 //  resource_group_name = var.resource_group_name
@@ -26,29 +26,102 @@ resource "azurerm_lb_backend_address_pool" "backend_pool" {
 //  number_of_probes    = 2
 //}
 
-resource "azurerm_lb_probe" "ssh" {
-  name                = "ssh-running-probe"
+//resource "azurerm_lb_probe" "ssh" {
+//  name                = "ssh-running-probe"
+//  resource_group_name = var.resource_group_name
+//  loadbalancer_id     = azurerm_lb.lb.id
+//  port                = 22
+//  protocol            = "Tcp"
+//}
+
+//resource "azurerm_lb_rule" "lb_rule" {
+//  resource_group_name            = var.resource_group_name
+//  loadbalancer_id                = azurerm_lb.lb.id
+//  name                           = "LBRule"
+//  protocol                       = "tcp"
+//  frontend_port                  = 443
+//  backend_port                   = 443
+//  frontend_ip_configuration_name = "LoadBalancerFrontEnd"
+//  enable_floating_ip             = false
+//  backend_address_pool_id        = azurerm_lb_backend_address_pool.backend_pool.id
+//  idle_timeout_in_minutes        = 5
+//  probe_id                       = azurerm_lb_probe.ssh.id
+//  depends_on                     = ["azurerm_lb_probe.ssh"]
+//}
+####################################################################################
+resource "azurerm_public_ip" "app_gtway_public_ip" {
+  name                = "appgtway-pip"
   resource_group_name = var.resource_group_name
-  loadbalancer_id     = azurerm_lb.lb.id
-  port                = 22
-  protocol            = "Tcp"
+  location            = var.resource_group_location
+  allocation_method   = "Static"
+  sku = "Standard"
 }
 
-resource "azurerm_lb_rule" "lb_rule" {
-  resource_group_name            = var.resource_group_name
-  loadbalancer_id                = azurerm_lb.lb.id
-  name                           = "LBRule"
-  protocol                       = "tcp"
-  frontend_port                  = 443
-  backend_port                   = 443
-  frontend_ip_configuration_name = "LoadBalancerFrontEnd"
-  enable_floating_ip             = false
-  backend_address_pool_id        = azurerm_lb_backend_address_pool.backend_pool.id
-  idle_timeout_in_minutes        = 5
-  probe_id                       = azurerm_lb_probe.ssh.id
-  depends_on                     = ["azurerm_lb_probe.ssh"]
+locals {
+  backend_address_pool_name      = "${var.az_virtual_network_name}-beap"
+  frontend_port_name             = "${var.az_virtual_network_name}-feport"
+  frontend_ip_configuration_name = "${var.az_virtual_network_name}-feip"
+  http_setting_name              = "${var.az_virtual_network_name}-be-htst"
+  listener_name                  = "${var.az_virtual_network_name}-httplstn"
+  request_routing_rule_name      = "${var.az_virtual_network_name}-rqrt"
+  redirect_configuration_name    = "${var.az_virtual_network_name}-rdrcfg"
 }
 
+resource "azurerm_application_gateway" "network" {
+  name                = "appgateway"
+  resource_group_name = var.resource_group_name
+  location            = var.resource_group_location
+
+  sku {
+    name     = "WAF_v2"
+    tier     = "WAF_v2"
+    capacity = 1
+  }
+
+  gateway_ip_configuration {
+    name      = "my-gateway-ip-configuration"
+    subnet_id = var.subnet_id_appgateway
+  }
+
+  frontend_port {
+    name = "${local.frontend_port_name}"
+    port = 80
+  }
+
+  frontend_ip_configuration {
+    name                 = "${local.frontend_ip_configuration_name}"
+    public_ip_address_id = azurerm_public_ip.app_gtway_public_ip.id
+  }
+
+  backend_address_pool {
+    name = "${local.backend_address_pool_name}"
+  }
+
+  backend_http_settings {
+    name                  = "${local.http_setting_name}"
+    cookie_based_affinity = "Disabled"
+    port                  = 80
+    protocol              = "Http"
+    request_timeout       = 1
+  }
+
+  http_listener {
+    name                           = "${local.listener_name}"
+    frontend_ip_configuration_name = "${local.frontend_ip_configuration_name}"
+    frontend_port_name             = "${local.frontend_port_name}"
+    protocol                       = "Http"
+  }
+
+  request_routing_rule {
+    name                       = "${local.request_routing_rule_name}"
+    rule_type                  = "Basic"
+    http_listener_name         = "${local.listener_name}"
+    backend_address_pool_name  = "${local.backend_address_pool_name}"
+    backend_http_settings_name = "${local.http_setting_name}"
+  }
+}
+
+####################################################################################
 
 data "azurerm_image" "search" {
   resource_group_name = var.resource_group_name
@@ -61,9 +134,9 @@ resource "azurerm_virtual_machine_scale_set" "vm" {
   resource_group_name   = var.resource_group_name
 
   overprovision        = true
-  upgrade_policy_mode  = "Rolling"
+  upgrade_policy_mode  = "Manual"
   automatic_os_upgrade = false
-  health_probe_id      = azurerm_lb_probe.ssh.id
+//  health_probe_id      = azurerm_lb_probe.ssh.id
 
 
   storage_profile_image_reference {
@@ -90,7 +163,7 @@ resource "azurerm_virtual_machine_scale_set" "vm" {
       name = "${var.env}-ip-config"
       primary = true
       subnet_id = var.subnet_id
-      load_balancer_backend_address_pool_ids = ["${azurerm_lb_backend_address_pool.backend_pool.id}"]
+      application_gateway_backend_address_pool_ids =["${azurerm_application_gateway.network.backend_address_pool[0].id}"]
     }
   }
 

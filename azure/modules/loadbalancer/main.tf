@@ -106,3 +106,61 @@ resource "azurerm_virtual_machine_scale_set" "vm" {
     managed_disk_type = "Standard_LRS"
   }
 }
+
+
+resource "azurerm_monitor_autoscale_setting" "scaling_policies" {
+  name                = "autoscale-cpu"
+  target_resource_id  = azurerm_virtual_machine_scale_set.vm.id
+  location            = var.resource_group_location
+  resource_group_name = var.resource_group_name
+
+  profile {
+    name = "autoscale-cpu"
+
+    capacity {
+      default = 2
+      minimum = 2
+      maximum = 10
+    }
+
+    rule {
+      metric_trigger {
+        metric_name        = "Percentage CPU"
+        metric_resource_id = azurerm_virtual_machine_scale_set.vm.id
+        time_grain         = "PT1M"
+        statistic          = "Average"
+        time_window        = "PT5M"
+        time_aggregation   = "Average"
+        operator           = "GreaterThan"
+        threshold          = var.vm_increase_threshold
+      }
+
+      scale_action {
+        direction = "Increase"
+        type      = "ChangeCount"
+        value     = "1"
+        cooldown  = "PT1M"
+      }
+    }
+
+    rule {
+      metric_trigger {
+        metric_name        = "Percentage CPU"
+        metric_resource_id = azurerm_virtual_machine_scale_set.vm.id
+        time_grain         = "PT1M"
+        statistic          = "Average"
+        time_window        = "PT5M"
+        time_aggregation   = "Average"
+        operator           = "LessThan"
+        threshold          = var.vm_decrease_threshold
+      }
+
+      scale_action {
+        direction = "Decrease"
+        type      = "ChangeCount"
+        value     = "1"
+        cooldown  = "PT1M"
+      }
+    }
+  }
+}

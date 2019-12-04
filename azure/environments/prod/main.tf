@@ -89,4 +89,7 @@ module "loadbalancer" {
   subnet_id           = module.virtual_network.subnet_id_1
   azure_public_ip     = module.virtual_network.public_ip
   image_name          = var.image_name
+  resource_group_location = module.virtual_network.resource_group_location
+  vm_decrease_threshold = var.vm_decrease_threshold
+  vm_increase_threshold = var.vm_increase_threshold
 }

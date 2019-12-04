@@ -1,54 +1,3 @@
-//resource "azurerm_lb" "lb" {
-//  resource_group_name = var.resource_group_name
-//  name                = "${var.env}lb"
-//  location            = var.location
-//
-//  frontend_ip_configuration {
-//    name                 = "LoadBalancerFrontEnd"
-//    public_ip_address_id = var.azure_public_ip
-//  }
-//}
-//
-//resource "azurerm_lb_backend_address_pool" "backend_pool" {
-//  resource_group_name = var.resource_group_name
-//  loadbalancer_id     = azurerm_lb.lb.id
-//  name                = "${var.env}-BackendPool"
-//}
-
-//resource "azurerm_lb_probe" "lb_probe" {
-//  resource_group_name = var.resource_group_name
-//  loadbalancer_id     = azurerm_lb.lb.id
-//  name                = "httpProbe"
-//  protocol            = "http"
-//  port                = 80
-//  request_path        = "/health"
-//  interval_in_seconds = 5
-//  number_of_probes    = 2
-//}
-
-//resource "azurerm_lb_probe" "ssh" {
-//  name                = "ssh-running-probe"
-//  resource_group_name = var.resource_group_name
-//  loadbalancer_id     = azurerm_lb.lb.id
-//  port                = 22
-//  protocol            = "Tcp"
-//}
-
-//resource "azurerm_lb_rule" "lb_rule" {
-//  resource_group_name            = var.resource_group_name
-//  loadbalancer_id                = azurerm_lb.lb.id
-//  name                           = "LBRule"
-//  protocol                       = "tcp"
-//  frontend_port                  = 443
-//  backend_port                   = 443
-//  frontend_ip_configuration_name = "LoadBalancerFrontEnd"
-//  enable_floating_ip             = false
-//  backend_address_pool_id        = azurerm_lb_backend_address_pool.backend_pool.id
-//  idle_timeout_in_minutes        = 5
-//  probe_id                       = azurerm_lb_probe.ssh.id
-//  depends_on                     = ["azurerm_lb_probe.ssh"]
-//}
-####################################################################################
 resource "azurerm_public_ip" "app_gtway_public_ip" {
   name                = "appgtway-pip"
   resource_group_name = var.resource_group_name
@@ -121,7 +70,6 @@ resource "azurerm_application_gateway" "network" {
   }
 }
 
-####################################################################################
 
 data "azurerm_image" "search" {
   resource_group_name = var.resource_group_name

@@ -32,3 +32,5 @@ variable "ssh_key" {}
 variable "image_name" {}
 variable "vm_increase_threshold" {}
 variable "vm_decrease_threshold" {}
+
+variable "domain_name_tld" {}

@@ -17,3 +17,7 @@ output "subnet_id_1" {
 output "public_ip" {
  value = azurerm_public_ip.public_ip.id
 }
+
+output "public_ip_address" {
+ value = azurerm_public_ip.public_ip.ip_address
+}

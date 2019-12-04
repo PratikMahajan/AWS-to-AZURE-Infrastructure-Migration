@@ -13,3 +13,7 @@ output "resource_group_location" {
 output "subnet_id_1" {
  value = azurerm_subnet.subnet-1.id
 }
+
+output "public_ip" {
+ value = azurerm_public_ip.public_ip.id
+}

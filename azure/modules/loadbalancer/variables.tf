@@ -1,11 +1,9 @@
-variable "dns_name" {}
 variable "location" {}
 variable "resource_group_name" {}
-variable "rg_prefix" {}
-variable "lb_ip_dns_name" {}
 variable "env" {}
 variable "subnet_id" {}
-variable "vm_size" {}
 variable "ssh_key_data" {}
 variable "hostname" {}
 variable "admin_username" {}
+variable "image_name" {}
+variable "azure_public_ip" {}

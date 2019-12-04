@@ -1,5 +1,5 @@
 resource "azurerm_mariadb_server" "maria_db_server" {
-  name                = "mariadb-svr1"
+  name                = "${var.env}-mariadb-svr-${var.domain}"
   location            = var.resource_group_location
   resource_group_name = var.resource_group_name
 

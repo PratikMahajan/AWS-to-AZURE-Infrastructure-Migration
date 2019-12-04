@@ -10,6 +10,7 @@ module "virtual_network" {
   subnet2_addr  = var.subnet2_addr
   subnet3_addr  = var.subnet3_addr
   vnet_addr     = var.vnet_addr
+  lb_ip_dns_name = var.lb_ip_dns_name
 }
 
 module "storage_account" {
@@ -36,6 +37,8 @@ module "mariadb" {
   mariadb_ssl_enforcement       = var.mariadb_ssl_enforcement
   resource_group_location       = module.virtual_network.resource_group_location
   resource_group_name           = module.virtual_network.resource_group_name
+  domain = var.domain_name
+  env = var.env
 }
 
 module "event_grid" {
@@ -44,6 +47,7 @@ module "event_grid" {
   resource_group_location = module.virtual_network.resource_group_location
   resource_group_name     = module.virtual_network.resource_group_name
   topic                   = var.topic
+  domain_name = var.domain_name
 }
 
 
@@ -61,6 +65,8 @@ module "cosmos_db" {
   failover_loc            = var.failover_loc
   resource_group_location = module.virtual_network.resource_group_location
   resource_group_name     = module.virtual_network.resource_group_name
+  domain = var.domain_name
+  env = var.env
 }
 
 module "function" {
@@ -75,14 +81,12 @@ module "function" {
 module "loadbalancer" {
   source              = "../../modules/loadbalancer"
   admin_username      = "centos"
-  dns_name            = var.dns_name
   env                 = var.env
   hostname            = var.hostname
-  lb_ip_dns_name      = var.lb_ip_dns_name
   location            = module.virtual_network.resource_group_location
   resource_group_name = module.virtual_network.resource_group_name
-  rg_prefix           = var.rg_prefix
   ssh_key_data        = var.ssh_key
   subnet_id           = module.virtual_network.subnet_id_1
-  vm_size             = var.vm_size
+  azure_public_ip     = module.virtual_network.public_ip
+  image_name          = var.image_name
 }

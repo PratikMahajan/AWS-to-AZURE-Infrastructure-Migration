@@ -1,9 +1,12 @@
 variable "env" {}
+variable "domain_name" {}
+
 variable "location" {}
 variable "vnet_addr" {}
 variable "subnet1_addr" {}
 variable "subnet2_addr" {}
 variable "subnet3_addr" {}
+variable "lb_ip_dns_name" {}
 
 variable "storage_account_name" {}
 
@@ -24,9 +27,6 @@ variable "function_bolb_name" {}
 variable "function_name" {}
 
 
-variable "dns_name" {}
 variable "hostname" {}
-variable "lb_ip_dns_name" {}
-variable "rg_prefix" {}
 variable "ssh_key" {}
-variable "vm_size" {}
+variable "image_name" {}

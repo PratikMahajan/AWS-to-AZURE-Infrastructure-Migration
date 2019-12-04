@@ -6,3 +6,5 @@ variable "mariadb_admin_login_username" {}
 variable "mariadb_admin_login_password" {}
 variable "mariadb_ssl_enforcement" {}
 variable "mariadb_name" {}
+variable "env" {}
+variable "domain" {}

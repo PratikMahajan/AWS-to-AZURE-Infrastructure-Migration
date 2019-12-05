@@ -7,7 +7,7 @@ vnet_addr     = ["10.0.0.0/16"]
 subnet1_addr  = "10.0.1.0/24"
 subnet2_addr  = "10.0.2.0/24"
 subnet3_addr  = "10.0.3.0/24"
-lb_ip_dns_name  = "azvadapw"
+lb_ip_dns_name  = "azdomaintld"
 
 storage_account_name = "domaintld"
 
@@ -39,3 +39,6 @@ vm_decrease_threshold = 5
 ssh_key         = "ssh-rsa AAAAB{}bw09////EiDdi{}qwIUMeSegsKSSkGPl{}rNDpCdcJm8nYz+K0JIXf{}oaDK1ZV4Xyry0e{}"
 
 domain_name_tld = "az.domain.tld"
+
+cert_password = "123123123123123"
+cert_path = "/home/xyz/abc/Project/azure/environments/prod/certificate.pfx"

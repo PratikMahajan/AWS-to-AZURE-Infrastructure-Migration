@@ -17,8 +17,6 @@ locals {
 }
 
 
-variable "cert_path" {}
-variable "cert_password" {}
 resource "azurerm_application_gateway" "network" {
   name                = "appgateway"
   resource_group_name = var.resource_group_name

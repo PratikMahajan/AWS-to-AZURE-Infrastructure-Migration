@@ -16,6 +16,9 @@ locals {
   redirect_configuration_name    = "${var.az_virtual_network_name}-rdrcfg"
 }
 
+
+variable "cert_path" {}
+variable "cert_password" {}
 resource "azurerm_application_gateway" "network" {
   name                = "appgateway"
   resource_group_name = var.resource_group_name
@@ -34,7 +37,7 @@ resource "azurerm_application_gateway" "network" {
 
   frontend_port {
     name = "${local.frontend_port_name}"
-    port = 80
+    port = 443
   }
 
   frontend_ip_configuration {
@@ -54,11 +57,18 @@ resource "azurerm_application_gateway" "network" {
     request_timeout       = 1
   }
 
+  ssl_certificate {
+    data = filebase64("${var.cert_path}")
+    name = "imp-cert"
+    password = var.cert_password
+  }
+
   http_listener {
     name                           = "${local.listener_name}"
     frontend_ip_configuration_name = "${local.frontend_ip_configuration_name}"
     frontend_port_name             = "${local.frontend_port_name}"
-    protocol                       = "Http"
+    protocol                       = "Https"
+    ssl_certificate_name           = "imp-cert"
   }
 
   request_routing_rule {

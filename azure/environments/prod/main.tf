@@ -107,6 +107,9 @@ module "loadbalancer" {
   vm_increase_threshold = var.vm_increase_threshold
   az_virtual_network_name = module.virtual_network.virtual_network_name
   subnet_id_appgateway = module.virtual_network.subnet_id_3
+  ssl_cert_name         = module.key_vault.ssl_cert_name
+  cert_password = var.cert_password
+  cert_path = var.cert_path
 }
 
 module "dns" {

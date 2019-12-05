@@ -12,3 +12,4 @@ variable "resource_group_location" {}
 variable "vm_increase_threshold" {}
 variable "vm_decrease_threshold" {}
 variable "az_virtual_network_name" {}
+variable "ssl_cert_name" {}

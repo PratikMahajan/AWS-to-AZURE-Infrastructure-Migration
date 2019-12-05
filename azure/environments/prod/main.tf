@@ -78,18 +78,18 @@ module "function" {
 }
 
 
-module "key_vault" {
-  source = "../../modules/key_vault"
-  cert_issuer_name = var.cert_issuer_name
-  cert_password = var.cert_password
-  cert_path = var.cert_path
-  env = var.env
-  resource_group_location = module.virtual_network.resource_group_location
-  resource_group_name = module.virtual_network.resource_group_name
-  sp_object_id = var.sp_object_id
-  domain = var.domain_name
-  tenet_id = var.tenet_id
-}
+//module "key_vault" {
+//  source = "../../modules/key_vault"
+//  cert_issuer_name = var.cert_issuer_name
+//  cert_password = var.cert_password
+//  cert_path = var.cert_path
+//  env = var.env
+//  resource_group_location = module.virtual_network.resource_group_location
+//  resource_group_name = module.virtual_network.resource_group_name
+//  sp_object_id = var.sp_object_id
+//  domain = var.domain_name
+//  tenet_id = var.tenet_id
+//}
 
 module "loadbalancer" {
   source              = "../../modules/loadbalancer"
@@ -107,7 +107,6 @@ module "loadbalancer" {
   vm_increase_threshold = var.vm_increase_threshold
   az_virtual_network_name = module.virtual_network.virtual_network_name
   subnet_id_appgateway = module.virtual_network.subnet_id_3
-  ssl_cert_name         = module.key_vault.ssl_cert_name
   cert_password = var.cert_password
   cert_path = var.cert_path
 }

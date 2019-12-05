@@ -1,0 +1,9 @@
+variable "resource_group_location" {}
+variable "resource_group_name" {}
+variable "env" {}
+variable "cert_password" {}
+variable "cert_path" {}
+variable "cert_issuer_name" {}
+variable "sp_object_id" {}
+variable "domain" {}
+variable "tenet_id" {}

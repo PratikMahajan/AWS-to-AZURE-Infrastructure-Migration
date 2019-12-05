@@ -63,11 +63,6 @@ resource "azurerm_subnet_route_table_association" "subnet-2" {
   route_table_id = azurerm_route_table.azurt.id
 }
 
-resource "azurerm_subnet_route_table_association" "subnet-3" {
-  subnet_id      = azurerm_subnet.subnet-3.id
-  route_table_id = azurerm_route_table.azurt.id
-}
-
 
 resource "azurerm_application_security_group" "application" {
   name                = "appsecuritygroup"
@@ -164,10 +159,10 @@ resource "azurerm_subnet_network_security_group_association" "subnet2" {
   network_security_group_id = azurerm_network_security_group.network_sg.id
 }
 
-resource "azurerm_subnet_network_security_group_association" "subnet3" {
-  subnet_id                 = azurerm_subnet.subnet-3.id
-  network_security_group_id = azurerm_network_security_group.network_sg.id
-}
+//resource "azurerm_subnet_network_security_group_association" "subnet3" {
+//  subnet_id                 = azurerm_subnet.subnet-3.id
+//  network_security_group_id = azurerm_network_security_group.network_sg.id
+//}
 
 
 resource "azurerm_public_ip" "public_ip" {

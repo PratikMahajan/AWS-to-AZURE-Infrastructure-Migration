@@ -78,6 +78,19 @@ module "function" {
 }
 
 
+module "key_vault" {
+  source = "../../modules/key_vault"
+  cert_issuer_name = var.cert_issuer_name
+  cert_password = var.cert_password
+  cert_path = var.cert_path
+  env = var.env
+  resource_group_location = module.virtual_network.resource_group_location
+  resource_group_name = module.virtual_network.resource_group_name
+  sp_object_id = var.sp_object_id
+  domain = var.domain_name
+  tenet_id = var.tenet_id
+}
+
 module "loadbalancer" {
   source              = "../../modules/loadbalancer"
   admin_username      = "centos"

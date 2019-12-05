@@ -34,3 +34,9 @@ variable "vm_increase_threshold" {}
 variable "vm_decrease_threshold" {}
 
 variable "domain_name_tld" {}
+
+variable "cert_issuer_name" {}
+variable "cert_password" {}
+variable "cert_path" {}
+variable "sp_object_id" {}
+variable "tenet_id" {}

@@ -39,3 +39,6 @@ vm_decrease_threshold = 5
 ssh_key         = "ssh-rsa AAAAB{}bw09////EiDdi{}qwIUMeSegsKSSkGPl{}rNDpCdcJm8nYz+K0JIXf{}oaDK1ZV4Xyry0e{}"
 
 domain_name_tld = "az.domain.tld"
+
+cert_password = "123123123123123"
+cert_path = "/home/xyz/abc/Project/azure/environments/prod/certificate.pfx"

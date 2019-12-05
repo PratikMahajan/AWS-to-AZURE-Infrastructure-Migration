@@ -17,9 +17,6 @@ variable "mariadb_admin_login_username" {}
 variable "mariadb_name" {}
 variable "mariadb_ssl_enforcement" {}
 
-variable "domain_name" {}
-
-variable "centos_image_name" {}
 
 variable "topic" {}
 

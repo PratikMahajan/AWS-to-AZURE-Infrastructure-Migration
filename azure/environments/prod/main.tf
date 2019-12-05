@@ -41,22 +41,6 @@ module "mariadb" {
   env = var.env
 }
 
-module "dns_a_record" {
-  source	      = "../../modules/az_dns"
-  domain_name         = var.domain_name
-  resource_group_name = module.virtual_network.resource_group_name
-}
-
-module "virtual_machine" {
-  source	                   = "../../modules/virtual_machine"
-  centos_image_name                = var.centos_image_name
-  network_security_group_id        = module.virtual_network.network_security_group_id
-  subnet_id                        = module.virtual_network.subnet_id
-  public_ip_address_id             = module.virtual_network.public_ip_address_id
-  resource_group_name              = module.virtual_network.resource_group_name
-  resource_group_location          = module.virtual_network.resource_group_location
-}
-
 module "event_grid" {
   source                  = "../../modules/event_grid"
   env                     = var.env
